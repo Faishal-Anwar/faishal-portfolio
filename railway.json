@@ -5,6 +5,7 @@
     "nixpacksConfig": {
       "providers": ["php", "node"],
       "buildCmds": [
+        "chmod -R 775 storage bootstrap/cache",
         "composer install --no-dev --optimize-autoloader",
         "npm install",
         "npm run build"
