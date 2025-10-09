@@ -1,0 +1,57 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "public/index.php",
+            "use": "vercel-php@0.7.4"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/public/index.php"
+        }
+    ],
+    "env": {
+        "APP_NAME": "Laravel",
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://nama-proyek-anda.vercel.app",
+
+        "APP_KEY": "base64:OpYZ2vdH/KvTQWOmLEofxffpryMOKIa9fEsEaRK+PtM=",
+        
+        "LOG_CHANNEL": "stderr",
+
+        "DB_CONNECTION": "mysql",
+        "DB_HOST": "58n-o6.h.filess.io",
+        "DB_PORT": "61032",
+        "DB_DATABASE": "dbportfolio_factorrich",
+        "DB_USERNAME": "dbportfolio_factorrich",
+
+        "CACHE_STORE": "array",
+        "QUEUE_CONNECTION": "sync",
+        "SESSION_DRIVER": "cookie",
+        "SESSION_LIFETIME": "120",
+
+        "MAIL_MAILER": "smtp",
+        "MAIL_HOST": "smtp.gmail.com",
+        "MAIL_PORT": "587",
+        "MAIL_USERNAME": "anwarfaishal86@gmail.com",
+        "MAIL_ENCRYPTION": "tls",
+        "MAIL_FROM_ADDRESS": "anwarfaishal86@gmail.com",
+        "MAIL_FROM_NAME": "${APP_NAME}",
+
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+
+        "CLOUDINARY_CLOUD_NAME": "dl42whxjg"
+    }
+}
