@@ -16,14 +16,14 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="Faishal Anwar's Portfolio">
     <meta property="og:description" content="Portfolio Faishal Anwar, seorang Machine Learning Engineer & Data Scientist yang berfokus pada solusi AI, analisis data, dan algoritma berbasis data untuk memecahkan masalah dunia nyata.">
-    <meta property="og:image" content="{{ asset('images/profile.png') }}">
+    <meta property="og:image" content="{{ $profilePhotoUrl ?? asset('images/profile.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="Faishal Anwar's Portfolio">
     <meta property="twitter:description" content="Portfolio Faishal Anwar, seorang Machine Learning Engineer & Data Scientist yang berfokus pada solusi AI, analisis data, dan algoritma berbasis data untuk memecahkan masalah dunia nyata.">
-    <meta property="twitter:image" content="{{ asset('images/profile.png') }}">
+    <meta property="twitter:image" content="{{ $profilePhotoUrl ?? asset('images/profile.png') }}">
 
 
     <link rel="icon" href="https://placehold.co/32x32/0284c7/ffffff?text=FA" type="image/png">
@@ -254,13 +254,23 @@
     <div class="flex min-h-screen">
         <!-- Sidebar: Width reduced to w-64 -->
         <aside data-aos="fade-right" data-aos-duration="1000" class="sidebar hidden lg:flex w-64 flex-col p-6 shadow-xl rounded-3xl fixed top-8 bottom-8 left-8">
+            @auth
+            <a href="{{ route('profile.edit') }}" class="flex items-center gap-4 mb-6 group">
+                <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                <div>
+                    <h1 class="font-bold text-xl text-primary">Faishal Anwar</h1>
+                    <p class="text-sm text-secondary">ML Engineer</p>
+                </div>
+            </a>
+            @else
             <div class="flex items-center gap-4 mb-6">
-                <img src="{{ asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo">
+                <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo">
                 <div>
                     <h1 class="font-bold text-xl text-primary">Faishal Anwar</h1>
                     <p class="text-sm text-secondary">ML Engineer</p>
                 </div>
             </div>
+            @endauth
             
             <div class="flex gap-3 mb-6">
                 <a href="{{ asset('assets/CV-Faishal-Anwar.pdf') }}" download="CV-Faishal-Anwar.pdf" class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
@@ -326,10 +336,17 @@
         <header class="lg:hidden fixed top-6 left-6 right-6 shadow-md rounded-2xl z-50 backdrop-blur-sm mobile-header-bg">
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center h-16">
+                    @auth
+                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 group">
+                        <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                        <h1 class="font-bold text-md text-primary">Faishal Anwar</h1>
+                    </a>
+                    @else
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo">
+                        <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo">
                         <h1 class="font-bold text-md text-primary">Faishal Anwar</h1>
                     </div>
+                    @endauth
                     <div class="flex items-center gap-2">
                         <button id="theme-toggle-mobile" class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors text-slate-700 dark:text-slate-300">
                             <i data-lucide="sun" class="w-6 h-6 block dark:hidden"></i>

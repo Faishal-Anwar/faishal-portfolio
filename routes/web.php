@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProfileController;
 
 // Public Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -24,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('about', AboutController::class)->except(['index', 'show']);
     Route::resource('stack', StackController::class)->except(['index', 'show']);
     Route::resource('projects', ProjectController::class)->except(['index', 'show']);
+
+    // Profile Routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Authentication Routes
