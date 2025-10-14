@@ -8,9 +8,15 @@
     <div data-aos="fade-up" class="space-y-6 pt-8">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <h2 class="text-3xl font-bold text-primary">Projects</h2>
-            <div>
-                <p class="text-sm text-secondary sm:text-right">Available for Project</p>
-                <a href="{{ route('contact') }}" class="mt-1 inline-block bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
+            <div class="flex items-center gap-4 flex-shrink-0">
+                <div class="flex items-center gap-2 text-primary px-3 py-1.5 rounded-full text-sm font-semibold">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    <span>Available for Project</span>
+                </div>
+                <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
             </div>
         </div>
         <p class="text-lg leading-relaxed text-justify text-secondary">My projects reflect my commitment to solving complex challenges through design. Whether it’s building a travel platform or enhancing a real estate website, each project is a blend of innovation, strategy, and user-first design principles.</p>

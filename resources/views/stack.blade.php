@@ -8,7 +8,16 @@
             <div>
                  <h2 class="text-3xl font-bold text-primary">My Tech Stack</h2>
             </div>
-            <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
+            <div class="flex items-center gap-4 flex-shrink-0">
+                <div class="flex items-center gap-2 text-primary px-3 py-1.5 rounded-full text-sm font-semibold">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    <span>Available for Project</span>
+                </div>
+                <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
+            </div>
         </div>
          <p class="text-lg leading-relaxed text-justify text-secondary">I work with a dynamic stack of tools to bring my ideas to life. My goal is to create designs that are not only visually appealing but also optimized for usability, accessibility, and performance.</p>
     </div>
