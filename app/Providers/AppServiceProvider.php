@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
@@ -27,11 +27,11 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Share the profile photo URL with all views
-        if (Schema::hasTable('users')) {
+        // Share all site settings with all views
+        if (Schema::hasTable('settings')) {
             View::composer('*', function ($view) {
-                $adminUser = User::first(); // Assuming the first user is the admin
-                $view->with('profilePhotoUrl', $adminUser->profile_photo_url ?? null);
+                $siteSettings = Setting::pluck('value', 'key');
+                $view->with('siteSettings', $siteSettings);
             });
         }
     }

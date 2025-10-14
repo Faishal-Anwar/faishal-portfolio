@@ -6,13 +6,14 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 
 // Public Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'storeContactForm'])->name('contact.store');
 Route::get('/sitemap.xml', [PageController::class, 'sitemap'])->name('sitemap');
+Route::get('/download-cv', [SettingController::class, 'downloadCv'])->name('cv.download');
 
 
 // Public Resource Routes
@@ -26,9 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('stack', StackController::class)->except(['index', 'show']);
     Route::resource('projects', ProjectController::class)->except(['index', 'show']);
 
-    // Profile Routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Settings Routes
+    Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
 
 // Authentication Routes

@@ -197,11 +197,11 @@
     <div data-aos="fade-up">
         <h2 class="text-2xl font-bold mb-6 text-primary">Stack</h2>
         <div class="card p-8 rounded-2xl">
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 items-center">
+            <div class="grid grid-cols-3 gap-8 items-center">
                 @forelse ($stacks as $index => $stack)
-                    <a href="{{ route('stack.index') }}" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" class="flex items-center gap-3 transition-transform duration-300 hover:scale-110">
-                        <img src="{{ $stack->image }}" alt="{{ $stack->name }}" class="h-10 w-10 object-contain">
-                        <p class="font-medium text-base text-primary">{{ $stack->name }}</p>
+                    <a href="{{ route('stack.index') }}" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" class="flex items-center justify-center lg:justify-start gap-4 transition-transform duration-300 hover:scale-110">
+                        <img src="{{ $stack->image }}" alt="{{ $stack->name }}" class="w-full max-w-24 aspect-square object-contain">
+                        <p class="font-medium text-lg text-primary hidden lg:block">{{ $stack->name }}</p>
                     </a>
                 @empty
                     <p class="text-secondary col-span-full text-center">No stack items have been added yet.</p>

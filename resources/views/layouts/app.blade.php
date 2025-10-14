@@ -16,14 +16,14 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="Faishal Anwar's Portfolio">
     <meta property="og:description" content="Portfolio Faishal Anwar, seorang Machine Learning Engineer & Data Scientist yang berfokus pada solusi AI, analisis data, dan algoritma berbasis data untuk memecahkan masalah dunia nyata.">
-    <meta property="og:image" content="{{ $profilePhotoUrl ?? asset('images/profile.png') }}">
+    <meta property="og:image" content="{{ $siteSettings['profile_photo_url'] ?? asset('images/profile.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="Faishal Anwar's Portfolio">
     <meta property="twitter:description" content="Portfolio Faishal Anwar, seorang Machine Learning Engineer & Data Scientist yang berfokus pada solusi AI, analisis data, dan algoritma berbasis data untuk memecahkan masalah dunia nyata.">
-    <meta property="twitter:image" content="{{ $profilePhotoUrl ?? asset('images/profile.png') }}">
+    <meta property="twitter:image" content="{{ $siteSettings['profile_photo_url'] ?? asset('images/profile.png') }}">
 
 
     <link rel="icon" href="https://placehold.co/32x32/0284c7/ffffff?text=FA" type="image/png">
@@ -255,8 +255,8 @@
         <!-- Sidebar: Width reduced to w-64 -->
         <aside data-aos="fade-right" data-aos-duration="1000" class="sidebar hidden lg:flex w-64 flex-col p-6 shadow-xl rounded-3xl fixed top-8 bottom-8 left-8">
             @auth
-            <a href="{{ route('profile.edit') }}" class="flex items-center gap-4 mb-6 group">
-                <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+            <a href="{{ route('settings.edit') }}" class="flex items-center gap-4 mb-6 group">
+                <img src="{{ $siteSettings['profile_photo_url'] ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo group-hover:ring-2 group-hover:ring-blue-500 transition-all">
                 <div>
                     <h1 class="font-bold text-xl text-primary">Faishal Anwar</h1>
                     <p class="text-sm text-secondary">ML Engineer</p>
@@ -264,7 +264,7 @@
             </a>
             @else
             <div class="flex items-center gap-4 mb-6">
-                <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo">
+                <img src="{{ $siteSettings['profile_photo_url'] ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-12 h-12 rounded-full object-cover profile-logo">
                 <div>
                     <h1 class="font-bold text-xl text-primary">Faishal Anwar</h1>
                     <p class="text-sm text-secondary">ML Engineer</p>
@@ -273,7 +273,7 @@
             @endauth
             
             <div class="flex gap-3 mb-6">
-                <a href="{{ asset('assets/CV-Faishal-Anwar.pdf') }}" download="CV-Faishal-Anwar.pdf" class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                <a href="{{ route('cv.download') }}" class="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
                     <i data-lucide="download" class="w-4 h-4"></i>
                     <span>Download CV</span>
                 </a>
@@ -318,15 +318,15 @@
             </nav>
 
             <div class="mt-auto flex flex-col gap-1">
-                <a href="https://x.com/Faishal49226275" target="_blank" class="social-link flex items-center gap-3 px-4 py-1.5 rounded-xl text-sm transition-colors duration-300">
-                    <i data-lucide="twitter" class="w-5 h-5"></i>
-                    <span>Twitter</span>
+                <a href="{{ $siteSettings['github_url'] ?? '#' }}" target="_blank" class="social-link flex items-center gap-3 px-4 py-1.5 rounded-xl text-sm transition-colors duration-300">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                    <span>GitHub</span>
                 </a>
-                <a href="https://linkedin.com/in/faishal-anwar-hasyim-1391682a5/" target="_blank" class="social-link flex items-center gap-3 px-4 py-1.5 rounded-xl text-sm transition-colors duration-300">
+                <a href="{{ $siteSettings['linkedin_url'] ?? '#' }}" target="_blank" class="social-link flex items-center gap-3 px-4 py-1.5 rounded-xl text-sm transition-colors duration-300">
                     <i data-lucide="linkedin" class="w-5 h-5"></i>
                     <span>LinkedIn</span>
                 </a>
-                <a href="https://www.instagram.com/faishalah97?igsh=azA0dGFjM3lkd2Jm" target="_blank" class="social-link flex items-center gap-3 px-4 py-1.5 rounded-xl text-sm transition-colors duration-300">
+                <a href="{{ $siteSettings['instagram_url'] ?? '#' }}" target="_blank" class="social-link flex items-center gap-3 px-4 py-1.5 rounded-xl text-sm transition-colors duration-300">
                     <i data-lucide="instagram" class="w-5 h-5"></i>
                     <span>Instagram</span>
                 </a>
@@ -337,13 +337,13 @@
             <div class="container mx-auto px-4">
                 <div class="flex justify-between items-center h-16">
                     @auth
-                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 group">
-                        <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo group-hover:ring-2 group-hover:ring-blue-500 transition-all">
+                    <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 group">
+                        <img src="{{ $siteSettings['profile_photo_url'] ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo group-hover:ring-2 group-hover:ring-blue-500 transition-all">
                         <h1 class="font-bold text-md text-primary">Faishal Anwar</h1>
                     </a>
                     @else
                     <div class="flex items-center gap-3">
-                        <img src="{{ $profilePhotoUrl ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo">
+                        <img src="{{ $siteSettings['profile_photo_url'] ?? asset('images/profile.png') }}" alt="Profile Photo" class="w-8 h-8 rounded-full object-cover profile-logo">
                         <h1 class="font-bold text-md text-primary">Faishal Anwar</h1>
                     </div>
                     @endauth
@@ -453,7 +453,7 @@
                 });
             }
 
-            // --- BACK TO TOP BUTTON ---
+            // --- BACK TO Top BUTTON ---
             const backToTopButton = document.getElementById('back-to-top');
             const mainContent = document.querySelector('.main-content');
             mainContent.addEventListener('scroll', () => {

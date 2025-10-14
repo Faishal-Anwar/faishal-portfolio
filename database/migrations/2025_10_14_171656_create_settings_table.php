@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('profile_photo_url')->nullable()->after('password');
+        Schema::create('settings', function (Blueprint $table) {
+            $table->string('key')->unique();
+            $table->text('value')->nullable();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('profile_photo_url');
-        });
+        Schema::dropIfExists('settings');
     }
 };

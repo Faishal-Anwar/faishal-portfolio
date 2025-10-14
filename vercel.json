@@ -6,6 +6,7 @@
             "use": "vercel-php@0.7.4"
         }
     ],
+    "outputDirectory": "public",
     "routes": [
         {
             "src": "/build/(.*)",
@@ -20,7 +21,7 @@
         "APP_NAME": "Laravel",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://nama-proyek-anda.vercel.app",
+        "APP_URL": "https://faishal-portfolio.vercel.app",
 
         "APP_KEY": "base64:OpYZ2vdH/KvTQWOmLEofxffpryMOKIa9fEsEaRK+PtM=",
         

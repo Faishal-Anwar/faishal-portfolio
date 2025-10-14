@@ -18,30 +18,30 @@
         <div data-aos="fade-up" data-aos-delay="100" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
             <div class="flex items-center gap-4">
                 <div class="bg-slate-100 dark:bg-slate-700 p-3 rounded-lg"><i data-lucide="mail" class="w-6 h-6 text-slate-600 dark:text-slate-300"></i></div>
-                <span id="email-text" class="font-semibold text-base text-primary">anwarfaishal86@gmail.com</span>
+                <span id="email-text" class="font-semibold text-base text-primary">{{ $siteSettings['contact_email'] ?? 'anwarfaishal86@gmail.com' }}</span>
             </div>
             <button id="copy-email-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                 <i data-lucide="copy" class="w-5 h-5 text-secondary"></i>
             </button>
         </div>
-        <a href="https://linkedin.com/in/faishal-anwar-hasyim-1391682a5/" target="_blank" data-aos="fade-up" data-aos-delay="200" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
+        <a href="{{ $siteSettings['linkedin_url'] ?? '#' }}" target="_blank" data-aos="fade-up" data-aos-delay="200" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
             <div class="flex items-center gap-4">
                 <div class="bg-purple-100 dark:bg-slate-700 p-3 rounded-lg"><i data-lucide="linkedin" class="w-6 h-6 text-purple-600 dark:text-purple-400"></i></div>
                 <span class="font-semibold text-base text-primary">LinkedIn</span>
             </div>
             <i data-lucide="arrow-up-right" class="w-6 h-6 text-secondary"></i>
         </a>
-        <a href="https://www.instagram.com/faishalah97?igsh=azA0dGFjM3lkd2Jm" target="_blank" data-aos="fade-up" data-aos-delay="300" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
+        <a href="{{ $siteSettings['instagram_url'] ?? '#' }}" target="_blank" data-aos="fade-up" data-aos-delay="300" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
             <div class="flex items-center gap-4">
                 <div class="bg-green-100 dark:bg-slate-700 p-3 rounded-lg"><i data-lucide="instagram" class="w-6 h-6 text-green-600 dark:text-green-400"></i></div>
                 <span class="font-semibold text-base text-primary">Instagram</span>
             </div>
             <i data-lucide="arrow-up-right" class="w-6 h-6 text-secondary"></i>
         </a>
-        <a href="https://x.com/Faishal49226275" target="_blank" data-aos="fade-up" data-aos-delay="400" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
+        <a href="{{ $siteSettings['github_url'] ?? '#' }}" target="_blank" data-aos="fade-up" data-aos-delay="400" class="card p-6 rounded-2xl flex justify-between items-center hover:-translate-y-1.5 transition-transform duration-300">
             <div class="flex items-center gap-4">
-                <div class="bg-sky-100 dark:bg-slate-700 p-3 rounded-lg"><i data-lucide="twitter" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i></div>
-                <span class="font-semibold text-base text-primary">Twitter</span>
+                <div class="bg-sky-100 dark:bg-slate-700 p-3 rounded-lg"><i data-lucide="github" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i></div>
+                <span class="font-semibold text-base text-primary">GitHub</span>
             </div>
             <i data-lucide="arrow-up-right" class="w-6 h-6 text-secondary"></i>
         </a>
