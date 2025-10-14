@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: auto;
+}
+
+/* Color Variables for Light & Dark Mode */
+:root {
+    --background: #f1f5f9;
+    /* slate-100 */
+    --text-primary: #1e293b;
+    /* slate-800 */
+    --text-secondary: #475569;
+    /* slate-600 */
+    --card-bg: #ffffff;
+    --sidebar-bg: #ffffff;
+    --nav-active-bg: #e0f2fe;
+    /* sky-100 */
+    --nav-active-text: #0284c7;
+    /* sky-600 */
+    --nav-hover-bg: #f1f5f9;
+    /* slate-100 */
+    --nav-mobile-active-bg: #e0f2fe;
+    /* sky-100 */
+    --nav-mobile-active-text: #0284c7;
+    /* sky-100 */
+    --border-color: #e2e8f0;
+    /* slate-200 */
+    --input-bg: #f8fafc;
+    /* slate-50 */
+    --button-secondary-bg: #e2e8f0;
+    /* slate-200 */
+    --button-secondary-hover-bg: #cbd5e1;
+    /* slate-300 */
+    --grid-line-color: #e2e8f0;
+    /* slate-200 */
+}
+
+html.dark {
+    --background: #0f172a;
+    /* slate-900 */
+    --text-primary: #f1f5f9;
+    /* slate-100 */
+    --text-secondary: #94a3b8;
+    /* slate-400 */
+    --card-bg: #1e293b;
+    /* slate-800 */
+    --sidebar-bg: #1e293b;
+    /* slate-800 */
+    --nav-active-bg: #0c4a6e;
+    /* sky-900 */
+    --nav-active-text: #e0f2fe;
+    /* sky-100 */
+    --nav-hover-bg: #334155;
+    /* slate-700 */
+    --nav-mobile-active-bg: #0c4a6e;
+    /* sky-900 */
+    --nav-mobile-active-text: #e0f2fe;
+    /* sky-100 */
+    --border-color: #334155;
+    /* slate-700 */
+    --input-bg: #334155;
+    /* slate-700 */
+    --button-secondary-bg: #334155;
+    /* slate-700 */
+    --button-secondary-hover-bg: #475569;
+    /* slate-600 */
+    --grid-line-color: #334155;
+    /* slate-700 */
+}
+
+/* Base Styling - Font size adjusted */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Sidebar & Navigation */
+.sidebar {
+    background-color: var(--sidebar-bg);
+}
+
+.nav-link.active {
+    background-color: var(--nav-active-bg);
+    color: var(--nav-active-text);
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    background-color: var(--nav-hover-bg);
+}
+
+.nav-link-mobile.active {
+    background-color: var(--nav-mobile-active-bg);
+    color: var(--nav-mobile-active-text);
+    font-weight: 600;
+}
+
+.nav-link-mobile:hover {
+    background-color: var(--nav-hover-bg);
+}
+
+.social-link {
+    color: var(--text-secondary);
+}
+
+.social-link:hover {
+    background-color: var(--nav-hover-bg);
+    color: var(--text-primary);
+}
+
+/* Card & Shadow */
+.card {
+    background-color: var(--card-bg);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+.card:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+html.dark .card {
+    box-shadow: 0 4px 6px -1px rgb(255 255 255 / 0.02), 0 2px 4px -2px rgb(255 255 255 / 0.02);
+}
+
+html.dark .card:hover {
+    box-shadow: 0 10px 15px -3px rgb(255 255 255 / 0.05), 0 4px 6px -4px rgb(255 255 255 / 0.05);
+}
+
+/* Grid Background */
+.grid-background {
+    background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+}
+
+/* Form & Input */
+.form-input {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.form-input:focus {
+    --tw-ring-color: #2563eb;
+    /* blue-600 */
+}
+
+/* Timeline */
+.timeline-container>.timeline-item:first-child::before {
+    top: 18px;
+    /* Start the line at the center of the first icon */
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 3.5rem;
+    /* Space for icon and line */
+    padding-bottom: 3rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    /* (Icon width 36px / 2) */
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--border-color);
+}
+
+.timeline-item:last-child::before {
+    height: 18px;
+    /* Stop the line at the center of the last icon */
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Service Card Accordion */
+.service-card {
+    cursor: pointer;
+}
+
+.service-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding-top 0.5s ease-in-out;
+    padding-top: 0;
+}
+
+.service-card.active .service-details {
+    max-height: 20rem;
+    /* Adjust this value based on content length */
+    padding-top: 1rem;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.service-card.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Secondary Button (Theme Toggle) */
+.btn-secondary {
+    background-color: var(--button-secondary-bg);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--button-secondary-hover-bg);
+}
+
+/* Logo Animation */
+.profile-logo {
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* PERBAIKAN: CSS Kustom untuk background header & menu mobile */
+.mobile-header-bg {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+html.dark .mobile-header-bg {
+    background-color: rgba(30, 41, 59, 0.9);
+    /* slate-800 with 90% opacity */
+}
+
+.mobile-menu-bg {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+html.dark .mobile-menu-bg {
+    background-color: rgba(15, 23, 42, 0.95);
+    /* slate-900 with 95% opacity */
+}
+
+/* Utility */
+.main-content::-webkit-scrollbar {
+    display: none;
+}
+
+.main-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#back-to-top {
+    transition: opacity 0.3s, transform 0.3s;
+}
