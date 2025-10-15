@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
@@ -30,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
         // Share all site settings with all views
         if (Schema::hasTable('settings')) {
             View::composer('*', function ($view) {
-                $siteSettings = Setting::pluck('value', 'key');
+                $siteSettings = Cache::rememberForever('site.settings', function () {
+                    return Setting::pluck('value', 'key');
+                });
                 $view->with('siteSettings', $siteSettings);
             });
         }

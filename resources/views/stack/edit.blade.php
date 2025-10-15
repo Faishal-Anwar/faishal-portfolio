@@ -53,7 +53,7 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-secondary">Current Logo</label>
-                    <img src="{{ asset('storage/' . $stack->image) }}" alt="{{ $stack->name }}" class="h-20 w-20 rounded-lg object-cover">
+                    <img src="{{ $stack->image }}" alt="{{ $stack->name }}" class="h-20 w-20 rounded-lg object-cover">
                 </div>
             </div>
             <div class="text-right mt-6">

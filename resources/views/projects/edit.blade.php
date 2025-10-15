@@ -55,7 +55,7 @@
                 <div class="md:col-span-2">
                     <label for="image" class="block mb-2 text-sm font-medium text-secondary">Image</label>
                     <input type="file" id="image" name="image" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition">
-                    <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-32 h-32 object-cover mt-4">
+                    <img src="{{ $project->image }}" alt="{{ $project->title }}" class="w-32 h-32 object-cover mt-4">
                 </div>
                 <div class="md:col-span-2">
                     <label for="overview" class="block mb-2 text-sm font-medium text-secondary">Overview</label>

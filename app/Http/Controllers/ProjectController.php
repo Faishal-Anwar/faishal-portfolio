@@ -56,7 +56,9 @@ class ProjectController extends Controller
                 'api_secret' => env('CLOUDINARY_API_SECRET'),
             ],
         ]);
-        $data['image'] = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'projects'])['secure_url'];
+        $uploadedFile = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'projects']);
+        $data['image'] = $uploadedFile['secure_url'];
+        $data['image_public_id'] = $uploadedFile['public_id'];
 
         $data['slug'] = \Illuminate\Support\Str::slug($request->title);
         $data['is_featured'] = $request->has('is_featured');
@@ -100,8 +102,15 @@ class ProjectController extends Controller
         $data['is_featured'] = $request->has('is_featured');
 
         if ($request->hasFile('image')) {
-            if ($project->image) {
-                Storage::disk('cloudinary')->delete($project->image);
+            if ($project->image_public_id) {
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key'    => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $cloudinary->uploadApi()->destroy($project->image_public_id);
             }
             $cloudinary = new Cloudinary([
                 'cloud' => [
@@ -110,7 +119,9 @@ class ProjectController extends Controller
                     'api_secret' => env('CLOUDINARY_API_SECRET'),
                 ],
             ]);
-            $data['image'] = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'projects'])['secure_url'];
+            $uploadedFile = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'projects']);
+            $data['image'] = $uploadedFile['secure_url'];
+            $data['image_public_id'] = $uploadedFile['public_id'];
         }
 
         $data['slug'] = \Illuminate\Support\Str::slug($request->title);
@@ -123,7 +134,18 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        Storage::disk('cloudinary')->delete($project->image);
+        if ($project->image_public_id) {
+            $cloudinary = new Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+            $cloudinary->uploadApi()->destroy($project->image_public_id);
+        }
+
+        $project->stacks()->detach();
         $project->delete();
 
         return redirect()->route('projects.index')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Cloudinary\Cloudinary;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
@@ -50,6 +51,9 @@ class SettingController extends Controller
         if ($request->hasFile('cv_file')) {
             $this->handleFileUpload('cv_url', $request->file('cv_file'), $cloudinary, 'cv-files', 'raw');
         }
+
+        // Clear the settings cache
+        Cache::forget('site.settings');
 
         return redirect()->route('settings.edit')->with('success', 'Settings updated successfully.');
     }

@@ -10,6 +10,7 @@ class Stack extends Model
         'name',
         'description',
         'image',
+        'image_public_id',
         'is_showcased',
     ];
 

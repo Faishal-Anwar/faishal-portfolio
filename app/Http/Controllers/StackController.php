@@ -49,12 +49,15 @@ class StackController extends Controller
                 'api_secret' => env('CLOUDINARY_API_SECRET'),
             ],
         ]);
-        $imagePath = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'stacks'])['secure_url'];
+        $uploadedFile = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'stacks']);
+        $imagePath = $uploadedFile['secure_url'];
+        $publicId = $uploadedFile['public_id'];
 
         Stack::create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $imagePath,
+            'image_public_id' => $publicId,
             'is_showcased' => $request->has('is_showcased'),
         ]);
 
@@ -93,8 +96,15 @@ class StackController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete the old image
-            if ($stack->image) {
-                Storage::disk('cloudinary')->delete($stack->image);
+            if ($stack->image_public_id) {
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key'    => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $cloudinary->uploadApi()->destroy($stack->image_public_id);
             }
             // Store the new image
             $cloudinary = new Cloudinary([
@@ -104,7 +114,9 @@ class StackController extends Controller
                     'api_secret' => env('CLOUDINARY_API_SECRET'),
                 ],
             ]);
-            $data['image'] = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'stacks'])['secure_url'];
+            $uploadedFile = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), ['folder' => 'stacks']);
+            $data['image'] = $uploadedFile['secure_url'];
+            $data['image_public_id'] = $uploadedFile['public_id'];
         }
 
         $stack->update($data);
@@ -118,10 +130,18 @@ class StackController extends Controller
     public function destroy(Stack $stack)
     {
         // Delete the image from storage
-        if ($stack->image) {
-            Storage::disk('cloudinary')->delete($stack->image);
+        if ($stack->image_public_id) {
+            $cloudinary = new Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+            $cloudinary->uploadApi()->destroy($stack->image_public_id);
         }
 
+        $stack->projects()->detach();
         $stack->delete();
 
         return redirect()->route('stack.index')->with('success', 'Stack item deleted successfully.');
