@@ -33,7 +33,6 @@
         "DB_DATABASE": "dbportfolio_factorrich",
         "DB_USERNAME": "dbportfolio_factorrich",
 
-        "CACHE_STORE": "file",
         "QUEUE_CONNECTION": "sync",
         "SESSION_DRIVER": "cookie",
         "SESSION_LIFETIME": "120",
