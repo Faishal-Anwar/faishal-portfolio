@@ -17,7 +17,7 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $abouts = About::all()->groupBy('category');
+        $abouts = About::latest()->get()->groupBy('category');
         $categories = ['Academic Education', 'Experience', 'Non-Formal Education', 'Certifications'];
         return view('about', compact('abouts', 'categories'));
     }
