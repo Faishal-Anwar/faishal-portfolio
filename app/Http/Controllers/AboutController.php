@@ -66,7 +66,7 @@ class AboutController extends Controller
     {
         // Not needed as form is on the index page, but can be used for populating the edit form
         $about_item = About::findOrFail($id);
-        $abouts = About::all()->groupBy('category');
+        $abouts = About::latest()->get()->groupBy('category');
         $categories = ['Academic Education', 'Experience', 'Non-Formal Education', 'Certifications'];
         return view('about', compact('about_item', 'abouts', 'categories'));
     }
