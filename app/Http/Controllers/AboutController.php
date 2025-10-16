@@ -19,8 +19,7 @@ class AboutController extends Controller
     {
         $abouts = About::latest()->get()->groupBy('category');
         $categories = ['Academic Education', 'Experience', 'Non-Formal Education', 'Certifications'];
-        $about_item = new About();
-        return view('about', compact('abouts', 'categories', 'about_item'));
+        return view('about', compact('abouts', 'categories'));
     }
 
     /**
@@ -44,7 +43,7 @@ class AboutController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
-        $data = $request->validated();
+        $data = $request->all();
         $data['is_showcased'] = $request->has('is_showcased');
 
         About::create($data);
@@ -86,7 +85,7 @@ class AboutController extends Controller
         ]);
 
         $about = About::findOrFail($id);
-        $data = $request->validated();
+        $data = $request->all();
         $data['is_showcased'] = $request->has('is_showcased');
         
         $about->update($data);
