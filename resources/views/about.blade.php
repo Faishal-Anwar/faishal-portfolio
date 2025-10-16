@@ -69,7 +69,7 @@
 
                 <div class="md:col-span-2">
                     <label for="description" class="block mb-2 text-sm font-medium text-secondary">Description</label>
-                    <textarea id="description" name="description" rows="4" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition" required>{{ old('description', $about_item->description ?? '') }}</textarea>
+                    <textarea id="description" name="description" rows="4" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition">{{ old('description', $about_item->description ?? '') }}</textarea>
                 </div>
 
                 <div>
