@@ -38,7 +38,7 @@ class AboutController extends Controller
         $request->validate([
             'category' => 'required|in:Academic Education,Experience,Non-Formal Education,Certifications',
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
@@ -79,7 +79,7 @@ class AboutController extends Controller
         $request->validate([
             'category' => 'required|in:Academic Education,Experience,Non-Formal Education,Certifications',
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
