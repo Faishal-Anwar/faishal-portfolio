@@ -94,7 +94,7 @@
                     {{ isset($about_item) ? 'Update Entry' : 'Add Entry' }}
                 </button>
                  @if(isset($about_item))
-                    <a href="{{ route('about.index') }}" class="text-gray-600 ml-4">Cancel</a>
+                    <a href="{{ route('about.index') }}" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold text-base hover:bg-gray-300 transition-all duration-300 transform hover:scale-105 ml-4">Cancel</a>
                 @endif
             </div>
         </form>
