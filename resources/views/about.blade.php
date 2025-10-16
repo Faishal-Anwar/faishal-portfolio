@@ -43,10 +43,10 @@
     {{-- Add/Edit Form --}}
     @auth
     <div data-aos="fade-up" class="card p-8 rounded-2xl">
-        <h3 class="text-2xl font-bold mb-6 text-primary">{{ $about_item->exists ? 'Edit Entry' : 'Add New Entry' }}</h3>
-        <form action="{{ $about_item->exists ? route('about.update', $about_item->id) : route('about.store') }}" method="POST">
+        <h3 class="text-2xl font-bold mb-6 text-primary">{{ isset($about_item) ? 'Edit Entry' : 'Add New Entry' }}</h3>
+        <form action="{{ isset($about_item) ? route('about.update', $about_item->id) : route('about.store') }}" method="POST">
             @csrf
-            @if($about_item->exists)
+            @if(isset($about_item))
                 @method('PUT')
             @endif
 
@@ -55,7 +55,7 @@
                     <label for="category" class="block mb-2 text-sm font-medium text-secondary">Category</label>
                     <select id="category" name="category" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition" required>
                         @foreach($categories as $category)
-                            <option value="{{ $category }}" {{ ($about_item->exists && $about_item->category == $category) || old('category') == $category ? 'selected' : '' }}>
+                            <option value="{{ $category }}" {{ (isset($about_item) && $about_item->category == $category) || old('category') == $category ? 'selected' : '' }}>
                                 {{ $category }}
                             </option>
                         @endforeach
@@ -74,12 +74,12 @@
 
                 <div>
                     <label for="start_date" class="block mb-2 text-sm font-medium text-secondary">Start Date</label>
-                    <input type="date" id="start_date" name="start_date" value="{{ old('start_date', $about_item->exists ? $about_item->start_date : '') }}" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition" required>
+                    <input type="date" id="start_date" name="start_date" value="{{ old('start_date', isset($about_item) ? $about_item->start_date : '') }}" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition" required>
                 </div>
 
                 <div>
                     <label for="end_date" class="block mb-2 text-sm font-medium text-secondary">End Date (Optional)</label>
-                    <input type="date" id="end_date" name="end_date" value="{{ old('end_date', $about_item->exists ? $about_item->end_date : '') }}" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition">
+                    <input type="date" id="end_date" name="end_date" value="{{ old('end_date', isset($about_item) ? $about_item->end_date : '') }}" class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition">
                 </div>
                 <div class="md:col-span-2">
                     <label for="is_showcased" class="flex items-center text-sm font-medium text-secondary">
@@ -91,9 +91,9 @@
 
             <div class="mt-6 text-right">
                 <button type="submit" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
-                    {{ $about_item->exists ? 'Update Entry' : 'Add Entry' }}
+                    {{ isset($about_item) ? 'Update Entry' : 'Add Entry' }}
                 </button>
-                 @if($about_item->exists)
+                 @if(isset($about_item))
                     <a href="{{ route('about.index') }}" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold text-base hover:bg-gray-300 transition-all duration-300 transform hover:scale-105 ml-4">Cancel</a>
                 @endif
             </div>
