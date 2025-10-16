@@ -43,7 +43,7 @@ class AboutController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
         ]);
 
-        $data = $request->validated();
+        $data = $request->all();
         $data['is_showcased'] = $request->has('is_showcased');
 
         About::create($data);
@@ -85,7 +85,7 @@ class AboutController extends Controller
         ]);
 
         $about = About::findOrFail($id);
-        $data = $request->validated();
+        $data = $request->all();
         $data['is_showcased'] = $request->has('is_showcased');
         
         $about->update($data);
