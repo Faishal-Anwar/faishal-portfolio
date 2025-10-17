@@ -19,7 +19,7 @@
                 <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
             </div>
         </div>
-         <p class="text-lg leading-relaxed text-justify text-secondary">I work with a dynamic stack of tools to bring my ideas to life. My goal is to create designs that are not only visually appealing but also optimized for usability, accessibility, and performance.</p>
+         <p class="text-lg leading-relaxed text-justify text-secondary">I work with a comprehensive and data-centric tech stack to design, build, and deploy intelligent systems. My focus is on leveraging modern tools for machine learning, data processing, and analytics to ensure scalability, performance, and real-world impact.</p>
     </div>
 
     {{-- Success and Error Messages --}}
