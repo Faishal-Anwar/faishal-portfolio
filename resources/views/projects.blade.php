@@ -19,7 +19,7 @@
                 <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
             </div>
         </div>
-        <p class="text-lg leading-relaxed text-justify text-secondary">My projects reflect my commitment to solving complex challenges through design. Whether it’s building a travel platform or enhancing a real estate website, each project is a blend of innovation, strategy, and user-first design principles.</p>
+        <p class="text-lg leading-relaxed text-justify text-secondary">My projects represent my passion for turning data into intelligent solutions. From predictive analytics to AI-powered automation, each project showcases my ability to build end-to-end machine learning systems — from data collection and preprocessing to model deployment and performance optimization. I focus on creating scalable, data-driven applications that deliver real impact and support smarter decision-making.</p>
     </div>
 
     {{-- Add New Project Form (for authenticated users) --}}
