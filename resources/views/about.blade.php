@@ -162,7 +162,7 @@
     <div data-aos="zoom-in" data-aos-delay="200" class="card p-10 rounded-2xl grid-background">
         <div class="text-center">
             <h2 class="text-2xl font-semibold mb-4 max-w-md mx-auto text-primary">Do you have any project idea?</h2>
-            <a href="{{ route('contact') }}" class="mt-6 inline-block bg-sky-960 text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
+            <a href="{{ route('contact') }}" class="mt-6 inline-block bg-sky-600 text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
                 Contact Me
             </a>
         </div>
