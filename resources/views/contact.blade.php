@@ -84,7 +84,7 @@
                     <textarea id="message" name="message" rows="5" placeholder="Type something here..." required class="form-input w-full px-4 py-2.5 rounded-lg text-base focus:ring-2 focus:border-transparent transition"></textarea>
                 </div>
                 <div class="mt-6 text-right">
-                    <button type="submit" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
+                    <button type="submit" class="bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
                         Send Message
                     </button>
                 </div>
