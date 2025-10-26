@@ -20,7 +20,7 @@
                      </span>
                      <span>Available for Project</span>
                  </div>
-                <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
+                <a href="{{ route('contact') }}" class="bg-sky-600 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
             </div>
         </div>
         <div>
@@ -38,8 +38,8 @@
             <div data-aos="fade-up" data-aos-delay="100" class="service-card card p-6 rounded-2xl text-left transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center gap-4">
-                        <div class="p-3 rounded-lg bg-sky-100 dark:bg-slate-700">
-                            <i data-lucide="brain-circuit" class="w-7 h-7 text-sky-600 dark:text-sky-400"></i>
+                        <div class="p-3 rounded-lg bg-slate-700 dark:bg-slate-700">
+                            <i data-lucide="brain-circuit" class="w-7 h-7 text-sky-400 dark:text-sky-400"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-primary">Machine Learning</h3>
                     </div>
@@ -54,8 +54,8 @@
             <div data-aos="fade-up" data-aos-delay="200" class="service-card card p-6 rounded-2xl text-left transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center gap-4">
-                        <div class="p-3 rounded-lg bg-indigo-100 dark:bg-slate-700">
-                            <i data-lucide="database-zap" class="w-7 h-7 text-indigo-600 dark:text-indigo-400"></i>
+                        <div class="p-3 rounded-lg bg-slate-700 dark:bg-slate-700">
+                            <i data-lucide="database-zap" class="w-7 h-7 text-indigo-400 dark:text-indigo-400"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-primary">Data Scientist</h3>
                     </div>
@@ -70,8 +70,8 @@
             <div data-aos="fade-up" data-aos-delay="300" class="service-card card p-6 rounded-2xl text-left transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center gap-4">
-                        <div class="p-3 rounded-lg bg-emerald-100 dark:bg-slate-700">
-                            <i data-lucide="bar-chart-3" class="w-7 h-7 text-emerald-600 dark:text-emerald-400"></i>
+                        <div class="p-3 rounded-lg bg-slate-700 dark:bg-slate-700">
+                            <i data-lucide="bar-chart-3" class="w-7 h-7 text-emerald-400 dark:text-emerald-400"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-primary">Data Analyst</h3>
                     </div>
@@ -130,11 +130,11 @@
 
     @php
         $colors = [
-            'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300',
-            'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300',
-            'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-300',
-            'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300',
-            'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
+            'bg-sky-900 text-sky-300 dark:bg-sky-900 dark:text-sky-300',
+            'bg-emerald-900 text-emerald-300 dark:bg-emerald-900 dark:text-emerald-300',
+            'bg-rose-900 text-rose-300 dark:bg-rose-900 dark:text-rose-300',
+            'bg-amber-900 text-amber-300 dark:bg-amber-900 dark:text-amber-300',
+            'bg-indigo-900 text-indigo-300 dark:bg-indigo-900 dark:text-indigo-300',
         ];
     @endphp
 
@@ -219,7 +219,7 @@
     <div data-aos="zoom-in" data-aos-delay="500" class="card p-10 rounded-2xl grid-background">
         <div class="text-center">
             <h2 class="text-2xl font-semibold mb-4 max-w-md mx-auto text-primary">Do you have any project idea?</h2>
-            <a href="{{ route('contact') }}" class="mt-6 inline-block bg-slate-900 text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
+            <a href="{{ route('contact') }}" class="mt-6 inline-block bg-sky-600 text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
                 Contact Me
             </a>
         </div>
