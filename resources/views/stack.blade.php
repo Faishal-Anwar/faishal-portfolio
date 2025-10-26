@@ -16,7 +16,7 @@
                     </span>
                     <span>Available for Project</span>
                 </div>
-                <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
+                <a href="{{ route('contact') }}" class="bg-sky-600 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
             </div>
         </div>
          <p class="text-lg leading-relaxed text-justify text-secondary">I work with a dynamic stack of tools to bring my ideas to life. My goal is to create designs that are not only visually appealing but also optimized for usability, accessibility, and performance.</p>
