@@ -16,10 +16,10 @@
                     </span>
                     <span>Available for Project</span>
                 </div>
-                <a href="{{ route('contact') }}" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
+                <a href="{{ route('contact') }}" class="bg-sky-600 text-white px-5 py-2.5 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">Contact Me</a>
             </div>
         </div>
-        <p class="text-lg leading-relaxed text-justify text-secondary">My projects represent my passion for turning data into intelligent solutions. From predictive analytics to AI-powered automation, each project showcases my ability to build end-to-end machine learning systems — from data collection and preprocessing to model deployment and performance optimization. I focus on creating scalable, data-driven applications that deliver real impact and support smarter decision-making.</p>
+        <p class="text-lg leading-relaxed text-justify text-secondary">My projects reflect my commitment to solving complex challenges through design. Whether it’s building a travel platform or enhancing a real estate website, each project is a blend of innovation, strategy, and user-first design principles.</p>
     </div>
 
     {{-- Add New Project Form (for authenticated users) --}}
@@ -106,11 +106,11 @@
     {{-- Project List --}}
     @php
         $colors = [
-            'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300',
-            'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300',
-            'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-300',
-            'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300',
-            'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
+            'bg-sky-900 text-sky-300 dark:bg-sky-900 dark:text-sky-300',
+            'bg-emerald-900 text-emerald-300 dark:bg-emerald-900 dark:text-emerald-300',
+            'bg-rose-900 text-rose-300 dark:bg-rose-900 dark:text-rose-300',
+            'bg-amber-900 text-amber-300 dark:bg-amber-900 dark:text-amber-300',
+            'bg-indigo-900 text-indigo-300 dark:bg-indigo-900 dark:text-indigo-300',
         ];
     @endphp
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -156,7 +156,7 @@
      <div data-aos="zoom-in" class="card p-10 rounded-2xl grid-background">
         <div class="text-center">
             <h2 class="text-2xl font-semibold mb-4 max-w-md mx-auto text-primary">Do you have any project idea?</h2>
-            <a href="{{ route('contact') }}" class="mt-6 inline-block bg-slate-900 text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
+            <a href="{{ route('contact') }}" class="mt-6 inline-block bg-sky-600 text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-sky-700 dark:bg-sky-600 dark:hover:bg-sky-700 transition-all duration-300 transform hover:scale-105">
                 Contact Me
             </a>
         </div>
@@ -172,11 +172,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let tags = [];
 
     const colors = [
-        'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300',
-        'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300',
-        'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-300',
-        'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300',
-        'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
+        'bg-sky-900 text-sky-300 dark:bg-sky-900 dark:text-sky-300',
+        'bg-emerald-900 text-emerald-300 dark:bg-emerald-900 dark:text-emerald-300',
+        'bg-rose-900 text-rose-300 dark:bg-rose-900 dark:text-rose-300',
+        'bbg-amber-900 text-amber-300 dark:bg-amber-900 dark:text-amber-300',
+        'bg-indigo-900 text-indigo-300 dark:bg-indigo-900 dark:text-indigo-300',
     ];
 
     function renderTags() {
