@@ -199,7 +199,7 @@
         <div class="card p-8 rounded-2xl">
             <div class="grid grid-cols-3 gap-8 items-center">
                 @forelse ($stacks->reverse() as $index => $stack)
-                    <a href="{{ route('stack.index') }}" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" class="flex items-center justify-center lg:justify-start gap-4 transition-transform duration-300 hover:scale-110">
+                    <a href="{{ route('stack.index') }}" data-aos="fade-up" data-aos-delay="{{ (count($stacks) - 1 - $index) * 100 }}" class="flex items-center justify-center lg:justify-start gap-4 transition-transform duration-300 hover:scale-110">
                         <img src="{{ $stack->image }}" alt="{{ $stack->name }}" class="w-full max-w-24 aspect-square object-contain">
                         <p class="font-medium text-lg text-primary hidden lg:block">{{ $stack->name }}</p>
                     </a>
