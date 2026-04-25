@@ -41,7 +41,7 @@
         "DB_DATABASE": "defaultdb",
         "DB_USERNAME": "avnadmin",
 
-        "CACHE_STORE": "file",
+        "CACHE_STORE": "database",
         "QUEUE_CONNECTION": "sync",
         "SESSION_DRIVER": "cookie",
         "SESSION_LIFETIME": "120",
