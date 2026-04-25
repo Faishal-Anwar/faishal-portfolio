@@ -1,0 +1,58 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "public/index.php",
+            "use": "vercel-php@0.7.4"
+        }
+    ],
+    "outputDirectory": "public",
+    "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/public/index.php"
+        }
+    ],
+    "env": {
+        "APP_NAME": "Laravel",
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://faishal-portfolio.vercel.app/",
+
+        "APP_KEY": "base64:667PJgX9TmOkB5BGVWwoBoMUBHO2kFe4quCTWR93vAY=",
+        
+        "LOG_CHANNEL": "stderr",
+
+        "DB_CONNECTION": "mysql",
+        "DB_HOST": "db-portfolio-faishal-anwar.c.aivencloud.com",
+        "DB_PORT": "21931",
+        "DB_DATABASE": "defaultdb",
+        "DB_USERNAME": "avnadmin",
+
+        "CACHE_STORE": "array",
+        "QUEUE_CONNECTION": "sync",
+        "SESSION_DRIVER": "cookie",
+        "SESSION_LIFETIME": "120",
+
+        "MAIL_MAILER": "smtp",
+        "MAIL_HOST": "smtp.gmail.com",
+        "MAIL_PORT": "587",
+        "MAIL_USERNAME": "anwarfaishal86@gmail.com",
+        "MAIL_ENCRYPTION": "tls",
+        "MAIL_FROM_ADDRESS": "anwarfaishal86@gmail.com",
+        "MAIL_FROM_NAME": "${APP_NAME}",
+
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+
+        "CLOUDINARY_CLOUD_NAME": "dl42whxjg"
+    }
+}

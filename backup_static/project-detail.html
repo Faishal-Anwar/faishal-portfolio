@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | Faishal Anwar's Portfolio</title>
+    
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { zinc: { 950: '#09090b' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Instrument Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+    <style>
+        :root {
+            --bg-primary: #ffffff; --bg-secondary: #fafafa; --text-main: #09090b; --text-muted: #71717a;
+            --border-subtle: #e4e4e7; --accent-glow: rgba(0, 0, 0, 0.05); --sidebar-w: 280px;
+            --grid-dot: rgba(0, 0, 0, 0.08);
+        }
+        html.dark {
+            --bg-primary: #09090b; --bg-secondary: #121214; --text-main: #fafafa; --text-muted: #a1a1aa;
+            --border-subtle: #27272a; --accent-glow: rgba(255, 255, 255, 0.05);
+            --grid-dot: rgba(255, 255, 255, 0.07);
+        }
+        html { overflow-y: scroll; }
+        body { background: var(--bg-primary); color: var(--text-main); transition: background-color 0.4s; }
+        button i { width: 1.25rem; height: 1.25rem; }
+        h1, h2, h3, h4 { font-family: 'Instrument Sans', sans-serif; letter-spacing: -0.02em; }
+        .sidebar { width: var(--sidebar-w); background: var(--bg-secondary); border-right: 1px solid var(--border-subtle); }
+        .glass-card { background: var(--bg-primary); border: 1px solid var(--border-subtle); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 1.5rem; }
+        .glass-card:hover { border-color: var(--text-main); }
+        .nav-link { color: var(--text-muted); transition: 0.2s ease; font-weight: 500; font-size: 0.925rem; border-radius: 8px; padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .nav-link:hover, .nav-link.active { color: var(--text-main); background: var(--accent-glow); }
+        .nav-link.active { font-weight: 600; }
+        .elite-grid { background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px); background-size: 32px 32px; }
+        .main-content { opacity: 0; transition: opacity 0.6s ease; }
+        .mobile-nav-overlay { background: var(--bg-primary); position: fixed; inset: 0; z-index: 100; transform: translateX(100%); transition: 0.4s ease; }
+        .mobile-nav-overlay.open { transform: translateX(0); }
+
+        /* Mobile Specific Styles */
+        .mobile-header { 
+            background: var(--bg-primary); 
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 20px -5px rgba(0,0,0,0.1);
+        }
+        .nav-link-mobile {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+        }
+        .nav-link-mobile.active {
+            background: var(--accent-glow);
+            color: var(--text-main);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden text-main font-light">
+    <div class="flex min-h-screen relative text-main">
+        <!-- Sidebar (Desktop) -->
+        <aside class="sidebar fixed top-0 bottom-0 left-0 z-[60] hidden lg:flex flex-col p-10">
+            <div class="mb-6 text-main">
+                <img src="images/profile.png" alt="Profile" class="w-16 h-16 rounded-2xl object-cover mb-6 shadow-sm">
+                <h1 class="text-2xl font-bold tracking-tight">Faishal Anwar Hasyim</h1>
+                <p class="text-sm text-muted font-medium mt-1 uppercase font-bold tracking-widest">ML Engineer</p>
+            </div>
+            <div class="mb-8">
+                <a href="assets/CV-Faishal-Anwar.pdf" class="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-900 border border-border-subtle rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors text-main">
+                    <i data-lucide="download" class="w-3 h-3"></i> Download CV
+                </a>
+            </div>
+            <nav class="flex flex-col gap-1.5 flex-1 text-main">
+                <a href="index.html" class="nav-link"><i data-lucide="home" class="w-4 h-4 text-main"></i> Home</a>
+                <a href="about.html" class="nav-link"><i data-lucide="user-circle" class="w-4 h-4 text-main"></i> About Me</a>
+                <a href="projects.html" class="nav-link active"><i data-lucide="folder-kanban" class="w-4 h-4 text-main font-bold"></i> Projects</a>
+                <a href="stack.html" class="nav-link"><i data-lucide="layers" class="w-4 h-4 text-main"></i> Stack</a>
+                <a href="contact.html" class="nav-link"><i data-lucide="mail" class="w-4 h-4 text-main"></i> Contact</a>
+            </nav>
+            <div class="mt-auto pt-10 border-t border-border-subtle space-y-6 text-main">
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 border border-border-subtle rounded-lg hover:bg-secondary transition-colors text-main"><i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i><i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i></button>
+                    <div class="flex-1 text-[10px] uppercase font-bold tracking-widest text-muted opacity-50 text-main">V1.0 / SYNC</div>
+                </div>
+                <div class="flex gap-4 text-main">
+                    <a href="#" class="text-muted hover:text-main transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-muted hover:text-main transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-muted hover:text-main transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Header (Mobile) -->
+        <header class="lg:hidden fixed top-6 left-6 right-6 z-[60] mobile-header rounded-2xl h-16 flex items-center px-4 backdrop-blur-md bg-white/70 dark:bg-black/70">
+            <div class="flex justify-between items-center w-full font-bold">
+                <div class="flex items-center gap-3 text-main">
+                    <img src="images/profile.png" alt="Profile" class="w-8 h-8 rounded-full object-cover">
+                    <span class="font-bold tracking-tight text-base text-main">Faishal Anwar</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle-mobile" class="p-2 text-main"><i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i><i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i></button>
+                    <button id="mobile-menu-open" class="p-2 text-main"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Nav Overlay -->
+        <div id="mobile-nav" class="mobile-nav-overlay lg:hidden flex flex-col p-8 backdrop-blur-xl">
+            <div class="flex justify-between items-center mb-12 text-left">
+                <div class="flex items-center gap-3">
+                    <img src="images/profile.png" alt="Profile" class="w-10 h-10 rounded-full object-cover text-main">
+                    <span class="font-bold tracking-tight text-lg text-main">Faishal Anwar</span>
+                </div>
+                <button id="mobile-menu-close" class="p-2"><i data-lucide="x" class="w-7 h-7 text-main"></i></button>
+            </div>
+            <nav class="flex flex-col gap-4 text-left text-main font-bold">
+                <a href="index.html" class="nav-link-mobile"><i data-lucide="home" class="w-6 h-6"></i><span>Home</span></a>
+                <a href="about.html" class="nav-link-mobile"><i data-lucide="user-circle" class="w-6 h-6"></i><span>About Me</span></a>
+                <a href="projects.html" class="nav-link-mobile active"><i data-lucide="folder-kanban" class="w-6 h-6"></i><span>Projects</span></a>
+                <a href="stack.html" class="nav-link-mobile"><i data-lucide="layers" class="w-6 h-6"></i><span>Stack</span></a>
+                <a href="contact.html" class="nav-link-mobile"><i data-lucide="mail" class="w-6 h-6"></i><span>Contact</span></a>
+            </nav>
+            <div class="mt-auto pt-8 border-t border-border-subtle flex flex-col gap-8">
+                <a href="assets/CV-Faishal-Anwar.pdf" class="nav-link-mobile"><i data-lucide="download" class="w-6 h-6"></i><span>Download CV</span></a>
+                <div class="flex justify-center gap-8">
+                    <a href="#" class="text-muted hover:text-main transition-colors"><i data-lucide="github" class="w-6 h-6 text-main"></i></a>
+                    <a href="#" class="text-muted hover:text-main transition-colors"><i data-lucide="linkedin" class="w-6 h-6 text-main"></i></a>
+                    <a href="#" class="text-muted hover:text-main transition-colors"><i data-lucide="instagram" class="w-6 h-6 text-main"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <main class="main-content flex-1 lg:ml-[280px] p-6 pt-24 sm:p-12 lg:p-24 elite-grid text-main">
+            <div class="max-w-5xl mx-auto space-y-24">
+                <section data-aos="fade-up" class="space-y-8 pt-8 text-main">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                        <a href="projects.html" class="flex items-center gap-2 text-muted hover:text-main transition-colors uppercase text-[10px] font-bold tracking-widest"><i data-lucide="arrow-left" class="w-4 h-4 text-main"></i> Back to Projects</a>
+                        <div class="flex items-center gap-4 text-main">
+                            <div class="flex items-center gap-2 px-3 py-1.5 border border-border-subtle rounded-full text-xs font-bold uppercase tracking-widest text-muted bg-secondary/50">
+                                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
+                                Available for Project
+                            </div>
+                            <a href="contact.html" class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.05]">Contact Me</a>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-left">
+                        <h2 class="text-5xl sm:text-7xl font-bold tracking-tighter text-main">AI Sentiment <span class="italic font-light opacity-60">Analyzer</span>.</h2>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <span class="text-[10px] font-bold border border-border-subtle px-3 py-1 rounded-full text-muted uppercase tracking-widest bg-secondary/50">Machine Learning</span>
+                            <span class="text-[10px] font-bold border border-border-subtle px-3 py-1 rounded-full text-muted uppercase tracking-widest bg-secondary/50">March 2024</span>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="aspect-video bg-blue-50 dark:bg-blue-950/30 rounded-[2rem] overflow-hidden border border-border-subtle relative" data-aos="fade-up">
+                    <div class="absolute inset-0 elite-grid opacity-10"></div>
+                    <i data-lucide="brain" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 text-blue-600 dark:text-blue-400 opacity-20"></i>
+                    <img src="https://placehold.co/1200x600/09090b/ffffff?text=AI+Sentiment+Analyzer+Preview" alt="Project Hero" class="w-full h-full object-cover">
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                    <div class="lg:col-span-2 space-y-16 text-main">
+                        <section class="space-y-6" data-aos="fade-up">
+                            <h3 class="text-sm font-bold uppercase tracking-[0.3em] text-muted text-left">Overview</h3>
+                            <p class="text-xl text-muted leading-relaxed font-light text-justify">This project involved creating a robust sentiment analysis system that can process thousands of customer reviews in seconds. By leveraging state-of-the-art Natural Language Processing (NLP) techniques, the system provides businesses with an automated way to understand customer sentiment at scale.</p>
+                        </section>
+                        <section class="space-y-6" data-aos="fade-up">
+                            <h3 class="text-sm font-bold uppercase tracking-[0.3em] text-muted text-left">The Approach</h3>
+                            <p class="text-xl text-muted leading-relaxed font-light text-justify">I utilized a combination of transformer-based models (like BERT) and traditional machine learning algorithms to ensure both accuracy and performance. The data pipeline included cleaning, tokenization, and vectorization before feeding it into the model.</p>
+                        </section>
+                    </div>
+                    <div class="space-y-16 text-main">
+                        <section class="space-y-6" data-aos="fade-up">
+                            <h3 class="text-sm font-bold uppercase tracking-[0.3em] text-muted text-left text-main">Technologies</h3>
+                            <div class="flex flex-wrap gap-2 text-main">
+                                <span class="text-[9px] font-bold text-muted uppercase tracking-widest border border-border-subtle px-2 py-1 rounded-lg">Python</span>
+                                <span class="text-[9px] font-bold text-muted uppercase tracking-widest border border-border-subtle px-2 py-1 rounded-lg">PyTorch</span>
+                                <span class="text-[9px] font-bold text-muted uppercase tracking-widest border border-border-subtle px-2 py-1 rounded-lg">NLTK</span>
+                            </div>
+                        </section>
+                        <section class="space-y-6" data-aos="fade-up">
+                            <h3 class="text-sm font-bold uppercase tracking-[0.3em] text-muted text-left">Project Info</h3>
+                            <div class="space-y-4 text-sm text-main">
+                                <div class="flex justify-between border-b border-border-subtle pb-2"><span class="text-muted">Client:</span><span class="font-bold">Tech Solutions Inc.</span></div>
+                                <div class="flex justify-between border-b border-border-subtle pb-2"><span class="text-muted">Category:</span><span class="font-bold">Machine Learning</span></div>
+                                <div class="flex justify-between border-b border-border-subtle pb-2"><span class="text-muted">Date:</span><span class="font-bold">March 2024</span></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <section data-aos="zoom-in" class="glass-card p-16 text-center space-y-8 elite-grid text-main">
+                    <h2 class="text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main uppercase">Do you have any project idea?</h2>
+                    <a href="contact.html" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-[1.05] inline-block uppercase text-xs tracking-widest text-main">Contact Me</a>
+                </section>
+
+                <footer class="py-20 border-t border-border-subtle text-center text-[10px] font-bold tracking-[0.2em] text-muted opacity-50 uppercase text-main">© 2025 by Faishal. All rights reserved.</footer>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            AOS.init({ duration: 800, once: true, offset: 50 });
+            setTimeout(() => { document.querySelector('.main-content').style.opacity = '1'; }, 50);
+            const html = document.documentElement;
+            const themeToggles = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+            themeToggles.forEach(btn => { if(btn) btn.addEventListener('click', () => { const isDark = html.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); setTimeout(() => lucide.createIcons(), 10); }); });
+            const mobileNav = document.getElementById('mobile-nav');
+            document.getElementById('mobile-menu-open').addEventListener('click', () => { mobileNav.classList.add('open'); document.body.style.overflow = 'hidden'; });
+            document.getElementById('mobile-menu-close').addEventListener('click', () => { mobileNav.classList.remove('open'); document.body.style.overflow = 'auto'; });
+            const lenis = new Lenis({ duration: 1.1, lerp: 0.1 });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+        });
+    </script>
+</body>
+</html>
+    </script>
+</body>
+</html>
