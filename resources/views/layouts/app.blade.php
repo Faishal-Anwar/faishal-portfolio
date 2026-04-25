@@ -17,26 +17,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: { 
-                        zinc: { 950: '#09090b' },
-                        main: 'var(--text-main)',
-                        muted: 'var(--text-muted)',
-                        secondary: 'var(--bg-secondary)',
-                        primary: 'var(--bg-primary)',
-                        "border-subtle": 'var(--border-subtle)',
-                    },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Instrument Sans', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
-    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
