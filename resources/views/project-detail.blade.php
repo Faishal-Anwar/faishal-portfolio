@@ -6,16 +6,16 @@
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
-    .swiper { width: 100%; height: 100%; border-radius: 2rem; }
+    .swiper { width: 100%; height: 100%; }
+    .swiper-slide { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-    .swiper-button-next, .swiper-button-prev { color: var(--text-main); background: var(--bg-primary); width: 3rem; height: 3rem; border-radius: 99px; border: 1px solid var(--border-subtle); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    .swiper-button-next, .swiper-button-prev { color: var(--text-main); background: var(--bg-primary); width: 3rem; height: 3rem; border-radius: 99px; border: 1px solid var(--border-subtle); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 10; }
     .swiper-button-next:after, .swiper-button-prev:after { font-size: 1.25rem; font-weight: bold; }
     .swiper-pagination-bullet-active { background: var(--text-main); }
     
     @media (max-width: 640px) {
         .swiper-button-next, .swiper-button-prev { width: 2.25rem; height: 2.25rem; }
         .swiper-button-next:after, .swiper-button-prev:after { font-size: 1rem; }
-        .swiper { border-radius: 1.5rem; }
     }
 </style>
 @endsection
@@ -39,13 +39,13 @@
         </div>
 
         <!-- Slider Section -->
-        <div class="aspect-[4/3] sm:aspect-video relative border border-border-subtle rounded-[2rem] overflow-hidden bg-zinc-50 dark:bg-zinc-900/50">
+        <div class="aspect-[16/10] sm:aspect-video relative border border-border-subtle rounded-3xl sm:rounded-[2rem] overflow-hidden bg-zinc-50 dark:bg-zinc-900/50">
             @if($project->gallery && count($project->gallery) > 0)
-                <div class="swiper mySwiper">
+                <div class="swiper mySwiper absolute inset-0">
                     <div class="swiper-wrapper">
                         @foreach($project->gallery as $image)
                         <div class="swiper-slide">
-                            <img src="{{ strpos($image, 'http') === 0 ? $image : asset('storage/' . $image) }}" alt="Project image" class="object-cover">
+                            <img src="{{ strpos($image, 'http') === 0 ? $image : asset('storage/' . $image) }}" alt="Project image" class="w-full h-full object-cover">
                         </div>
                         @endforeach
                     </div>
@@ -118,6 +118,8 @@
         if (typeof Swiper !== 'undefined') {
             const swiper = new Swiper(".mySwiper", {
                 loop: true,
+                observer: true,
+                observeParents: true,
                 autoplay: {
                     delay: 3500,
                     disableOnInteraction: false,
