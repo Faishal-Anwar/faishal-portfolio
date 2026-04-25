@@ -23,7 +23,7 @@
                     <div class="flex flex-col md:flex-row gap-8 items-start">
                         <div class="shrink-0">
                             @if($profile->image)
-                            <img src="{{ asset('storage/' . $profile->image) }}" class="w-32 h-32 rounded-2xl object-cover border border-border-subtle shadow-lg" alt="Profile">
+                            <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" class="w-32 h-32 rounded-2xl object-cover border border-border-subtle shadow-lg" alt="Profile">
                             @else
                             <div class="w-32 h-32 rounded-2xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center border border-border-subtle border-dashed">
                                 <i data-lucide="user" class="w-12 h-12 text-muted"></i>
@@ -43,7 +43,7 @@
                                 @if($profile->cv_path)
                                 <div class="flex items-center gap-2 mt-2 ml-1">
                                     <i data-lucide="file-text" class="w-3 h-3 text-muted"></i>
-                                    <a href="{{ asset('storage/' . $profile->cv_path) }}" target="_blank" class="text-[9px] text-main font-bold uppercase tracking-widest underline">View Current CV</a>
+                                    <a href="{{ strpos($profile->cv_path, 'http') === 0 ? $profile->cv_path : asset('storage/' . $profile->cv_path) }}" target="_blank" class="text-[9px] text-main font-bold uppercase tracking-widest underline">View Current CV</a>
                                 </div>
                                 @endif
                                 <p class="text-[9px] text-muted uppercase tracking-widest mt-1 ml-1 italic">Max 5MB. PDF format only.</p>

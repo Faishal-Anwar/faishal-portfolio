@@ -42,7 +42,11 @@ class AdminController extends Controller
     // --- Profile Management ---
     public function profile()
     {
-        $profile = Profile::first() ?? new Profile();
+        $profile = Profile::first() ?? new Profile([
+            'name' => 'Faishal Anwar',
+            'title' => 'ML Engineer',
+            'email' => 'anwarfaishal86@gmail.com'
+        ]);
         return view('admin.profile.index', compact('profile'));
     }
 
@@ -53,7 +57,7 @@ class AdminController extends Controller
             'title' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:1024',
-            'cv' => 'nullable|mimes:pdf|max:5120',
+            'cv' => 'nullable|mimes:pdf|max:10240',
             'github_url' => 'nullable|url',
             'linkedin_url' => 'nullable|url',
             'instagram_url' => 'nullable|url',
@@ -62,12 +66,16 @@ class AdminController extends Controller
         $profile = Profile::first() ?? new Profile();
 
         if ($request->hasFile('image')) {
-            $this->cloudinary->delete($profile->image);
+            if ($profile->image && strpos($profile->image, 'http') === 0) {
+                $this->cloudinary->delete($profile->image);
+            }
             $validated['image'] = $this->cloudinary->upload($request->file('image'), 'profile');
         }
 
         if ($request->hasFile('cv')) {
-            $this->cloudinary->delete($profile->cv_path);
+            if ($profile->cv_path && strpos($profile->cv_path, 'http') === 0) {
+                $this->cloudinary->delete($profile->cv_path);
+            }
             $validated['cv_path'] = $this->cloudinary->upload($request->file('cv'), 'cv');
         }
 

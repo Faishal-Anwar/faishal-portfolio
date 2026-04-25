@@ -152,7 +152,7 @@
                 <h1 class="text-3xl font-bold tracking-tight">{{ $profile->name }}</h1>
             </div>
             <div class="mb-8 text-left">
-                <a href="{{ route('download.cv') }}" class="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-900 border border-black border-border-subtle dark:border-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors text-main">
+                <a href="{{ route('download.cv') }}" download class="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-900 border border-black border-border-subtle dark:border-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors text-main">
                     <i data-lucide="download" class="w-3 h-3"></i> Download CV
                 </a>
             </div>
@@ -234,7 +234,7 @@
                 <a href="{{ route('contact') }}" class="nav-link-mobile {{ request()->routeIs('contact') ? 'active' : '' }}"><i data-lucide="mail" class="w-6 h-6"></i><span>Contact</span></a>
             </nav>
             <div class="mt-auto pt-8 border-t border-border-subtle flex flex-col gap-8">
-                <a href="{{ route('download.cv') }}" class="nav-link-mobile"><i data-lucide="download" class="w-6 h-6"></i><span>Download CV</span></a>
+                <a href="{{ route('download.cv') }}" download class="nav-link-mobile"><i data-lucide="download" class="w-6 h-6"></i><span>Download CV</span></a>
                 <div class="flex justify-center gap-8">
                     @if($profile->github_url) <a href="{{ $profile->github_url }}" target="_blank" class="text-muted hover:text-main transition-colors"><i data-lucide="github" class="w-6 h-6 text-main"></i></a> @endif
                     @if($profile->linkedin_url) <a href="{{ $profile->linkedin_url }}" target="_blank" class="text-muted hover:text-main transition-colors"><i data-lucide="linkedin" class="w-6 h-6 text-main"></i></a> @endif

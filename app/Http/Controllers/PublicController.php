@@ -48,10 +48,18 @@ class PublicController extends Controller
         });
     }
 
+    public function projectDetail($slug)
+    {
+        return Cache::remember("project_detail_{$slug}", 86400, function () use ($slug) {
+            $project = Project::where('slug', $slug)->firstOrFail();
+            return view('project-detail', compact('project'))->render();
+        });
+    }
+
     public function stack()
     {
         return Cache::remember('stack_data', 86400, function () {
-            $stacks = TechStack::all()->groupBy('category');
+            $stacks = TechStack::all();
             return view('stack', compact('stacks'))->render();
         });
     }
@@ -61,51 +69,62 @@ class PublicController extends Controller
         return view('contact');
     }
 
-    public function projectDetail($slug)
-    {
-        return Cache::remember("project_detail_{$slug}", 86400, function () use ($slug) {
-            $project = Project::where('slug', $slug)->firstOrFail();
-            return view('project-detail', compact('project'))->render();
-        });
-    }
-
     public function storeInquiry(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
 
         $inquiry = Inquiry::create($validated);
 
-        // Send Email Notification
         try {
-            Mail::to(env('MAIL_TO_ADDRESS', 'anwarfaishal86@gmail.com'))->send(new InquiryNotification($inquiry));
+            Mail::to('anwarfaishal86@gmail.com')->send(new InquiryNotification($inquiry));
         } catch (\Exception $e) {
-            \Log::error('Mail sending failed: ' . $e->getMessage());
+            // Silently fail if mail fails
         }
 
-        return back()->with('success', 'Thank you for your message! I will get back to you soon.');
+        return back()->with('success', 'Your message has been sent successfully!');
     }
 
     public function downloadCv()
     {
-        $profile = Profile::first();
+        try {
+            $profile = Cache::remember('global_profile', 3600, function () {
+                return Profile::first();
+            });
 
-        if ($profile && $profile->cv_path && strpos($profile->cv_path, 'http') === 0) {
-            $url = $profile->cv_path;
-            if (strpos($url, 'upload/') !== false) {
-                $url = str_replace('upload/', 'upload/fl_attachment/', $url);
+            if ($profile && $profile->cv_path) {
+                $url = $profile->cv_path;
+                
+                // If it's a Cloudinary URL
+                if (strpos($url, 'http') === 0) {
+                    if (strpos($url, 'cloudinary.com') !== false) {
+                        // Ensure fl_attachment is present to force download
+                        if (strpos($url, 'upload/') !== false && strpos($url, 'fl_attachment') === false) {
+                            $url = str_replace('upload/', 'upload/fl_attachment/', $url);
+                        }
+                    }
+                    return redirect($url);
+                }
+
+                // If it's a local storage path
+                if (Storage::disk('public')->exists($url)) {
+                    return Storage::disk('public')->download($url);
+                }
             }
-            return redirect($url);
+        } catch (\Exception $e) {
+            // Fallback to static asset if error occurs
         }
 
+        // Final direct download fallback for static asset
         $staticPath = public_path('assets/CV-Faishal-Anwar.pdf');
         if (file_exists($staticPath)) {
-            return response()->download($staticPath);
+            return response()->download($staticPath, 'CV-Faishal-Anwar.pdf');
         }
 
-        abort(404, 'CV file not found.');
+        return back()->with('error', 'CV file not found.');
     }
 }
