@@ -52,11 +52,11 @@ class AdminController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:1024',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'cv' => 'nullable|mimes:pdf|max:10240',
             'github_url' => 'nullable|url',
             'linkedin_url' => 'nullable|url',
@@ -64,22 +64,28 @@ class AdminController extends Controller
         ]);
 
         $profile = Profile::first() ?? new Profile();
+        
+        $profile->name = $request->name;
+        $profile->title = $request->title;
+        $profile->email = $request->email;
+        $profile->github_url = $request->github_url;
+        $profile->linkedin_url = $request->linkedin_url;
+        $profile->instagram_url = $request->instagram_url;
 
         if ($request->hasFile('image')) {
             if ($profile->image && strpos($profile->image, 'http') === 0) {
                 $this->cloudinary->delete($profile->image);
             }
-            $validated['image'] = $this->cloudinary->upload($request->file('image'), 'profile');
+            $profile->image = $this->cloudinary->upload($request->file('image'), 'profile');
         }
 
         if ($request->hasFile('cv')) {
             if ($profile->cv_path && strpos($profile->cv_path, 'http') === 0) {
                 $this->cloudinary->delete($profile->cv_path);
             }
-            $validated['cv_path'] = $this->cloudinary->upload($request->file('cv'), 'cv');
+            $profile->cv_path = $this->cloudinary->upload($request->file('cv'), 'cv');
         }
 
-        $profile->fill($validated);
         $profile->save();
 
         $this->clearPublicCache();

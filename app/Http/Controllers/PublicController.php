@@ -92,35 +92,36 @@ class PublicController extends Controller
     public function downloadCv()
     {
         try {
-            // Bypass cache to ensure we get the latest path
+            // Bypass cache for the actual download action
             $profile = Profile::first();
 
             if ($profile && $profile->cv_path) {
                 $url = $profile->cv_path;
                 
-                // If it's a Cloudinary URL
                 if (strpos($url, 'http') === 0) {
-                    if (strpos($url, 'cloudinary.com') !== false) {
-                        // Ensure fl_attachment is present to force download
-                        // Cloudinary supports fl_attachment for both images (PDFs as images) and raw files
-                        if (strpos($url, '/upload/') !== false && strpos($url, 'fl_attachment') === false) {
-                            $url = str_replace('/upload/', '/upload/fl_attachment/', $url);
+                    // Stream the file from Cloudinary to force a download from our domain
+                    // This bypasses Cloudinary's potential fl_attachment errors and browser tab behavior
+                    return response()->streamDownload(function () use ($url) {
+                        $stream = fopen($url, 'rb');
+                        if ($stream) {
+                            fpassthru($stream);
+                            fclose($stream);
                         }
-                    }
-                    return redirect($url);
+                    }, 'CV-Faishal-Anwar.pdf', [
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'attachment; filename="CV-Faishal-Anwar.pdf"',
+                    ]);
                 }
 
-                // If it's a local storage path (unlikely to work on Vercel unless in git)
                 if (Storage::disk('public')->exists($url)) {
                     return Storage::disk('public')->download($url);
                 }
             }
         } catch (\Exception $e) {
-            // Silently fall through to static fallback
+            // Fall through to local fallback
         }
 
         // Final direct download fallback for static asset in public/assets
-        // On Vercel, base_path('public/assets/...') is often more reliable than public_path()
         $staticPath = base_path('public/assets/CV-Faishal-Anwar.pdf');
         
         if (file_exists($staticPath)) {
@@ -130,7 +131,7 @@ class PublicController extends Controller
             ]);
         }
 
-        // Last resort: redirect to the asset URL directly
+        // Ultimate fallback: redirect to asset URL (might open in tab, but won't 404)
         return redirect(asset('assets/CV-Faishal-Anwar.pdf'));
     }
 }

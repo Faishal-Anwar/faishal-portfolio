@@ -114,6 +114,6 @@
         </section>
     </div>
 
-    <footer class="py-20 border-t border-border-subtle text-center text-[10px] font-bold tracking-[0.2em] text-muted opacity-50 uppercase text-main">© 2025 by {{ $profile->name }}. All rights reserved.</footer>
+    <footer class="py-20 border-t border-border-subtle text-center text-[10px] font-bold tracking-[0.2em] text-muted opacity-50 uppercase text-main">© 2026 by {{ $profile->name }}. All rights reserved.</footer>
 </div>
 @endsection

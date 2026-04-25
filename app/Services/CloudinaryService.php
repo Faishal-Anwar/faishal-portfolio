@@ -25,9 +25,17 @@ class CloudinaryService
 
     public function upload($file, $folder = 'portfolio')
     {
+        $resourceType = 'auto';
+        if ($file->getClientOriginalExtension() === 'pdf' || $file->getMimeType() === 'application/pdf') {
+            $resourceType = 'raw';
+        }
+
         $result = $this->cloudinary->uploadApi()->upload(
             $file->getRealPath(),
-            ['folder' => $folder]
+            [
+                'folder' => $resourceType === 'raw' ? 'cv' : $folder,
+                'resource_type' => $resourceType
+            ]
         );
 
         return $result['secure_url'];
@@ -40,6 +48,8 @@ class CloudinaryService
         // Extract public ID from URL
         // Example: https://res.cloudinary.com/demo/image/upload/v1571218039/sample.jpg
         $path = parse_url($url, PHP_URL_PATH);
+        if (!$path) return;
+        
         $parts = explode('/', $path);
         $filename = end($parts);
         $publicId = pathinfo($filename, PATHINFO_FILENAME);
@@ -52,7 +62,10 @@ class CloudinaryService
         }
 
         try {
-            $this->cloudinary->uploadApi()->destroy($publicId);
+            // We need to determine resource type for deletion too
+            // But Cloudinary destroy defaults to image. For raw, we need to specify.
+            $resourceType = (strpos($url, '/raw/') !== false) ? 'raw' : 'image';
+            $this->cloudinary->uploadApi()->destroy($publicId, ['resource_type' => $resourceType]);
         } catch (\Exception $e) {
             // Log or ignore
         }
