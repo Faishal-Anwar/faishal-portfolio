@@ -92,9 +92,8 @@ class PublicController extends Controller
     public function downloadCv()
     {
         try {
-            $profile = Cache::remember('global_profile', 3600, function () {
-                return Profile::first();
-            });
+            // Bypass cache to ensure we get the latest path
+            $profile = Profile::first();
 
             if ($profile && $profile->cv_path) {
                 $url = $profile->cv_path;
@@ -103,28 +102,35 @@ class PublicController extends Controller
                 if (strpos($url, 'http') === 0) {
                     if (strpos($url, 'cloudinary.com') !== false) {
                         // Ensure fl_attachment is present to force download
-                        if (strpos($url, 'upload/') !== false && strpos($url, 'fl_attachment') === false) {
-                            $url = str_replace('upload/', 'upload/fl_attachment/', $url);
+                        // Cloudinary supports fl_attachment for both images (PDFs as images) and raw files
+                        if (strpos($url, '/upload/') !== false && strpos($url, 'fl_attachment') === false) {
+                            $url = str_replace('/upload/', '/upload/fl_attachment/', $url);
                         }
                     }
                     return redirect($url);
                 }
 
-                // If it's a local storage path
+                // If it's a local storage path (unlikely to work on Vercel unless in git)
                 if (Storage::disk('public')->exists($url)) {
                     return Storage::disk('public')->download($url);
                 }
             }
         } catch (\Exception $e) {
-            // Fallback to static asset if error occurs
+            // Silently fall through to static fallback
         }
 
-        // Final direct download fallback for static asset
-        $staticPath = public_path('assets/CV-Faishal-Anwar.pdf');
+        // Final direct download fallback for static asset in public/assets
+        // On Vercel, base_path('public/assets/...') is often more reliable than public_path()
+        $staticPath = base_path('public/assets/CV-Faishal-Anwar.pdf');
+        
         if (file_exists($staticPath)) {
-            return response()->download($staticPath, 'CV-Faishal-Anwar.pdf');
+            return response()->download($staticPath, 'CV-Faishal-Anwar.pdf', [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="CV-Faishal-Anwar.pdf"',
+            ]);
         }
 
-        return back()->with('error', 'CV file not found.');
+        // Last resort: redirect to the asset URL directly
+        return redirect(asset('assets/CV-Faishal-Anwar.pdf'));
     }
 }
