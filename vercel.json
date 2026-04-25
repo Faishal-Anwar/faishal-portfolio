@@ -31,7 +31,8 @@
         "APP_NAME": "Portfolio Faishal",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://faishal-portfolio.vercel.app",
+        "APP_URL": "https://faishal-portfolio-blue.vercel.app",
+        "ASSET_URL": "https://faishal-portfolio-blue.vercel.app",
         "APP_KEY": "base64:667PJgX9TmOkB5BGVWwoBoMUBHO2kFe4quCTWR93vAY=",
         
         "LOG_CHANNEL": "stderr",
