@@ -21,47 +21,51 @@ class PublicController extends Controller
 {
     public function home()
     {
-        return Cache::remember('home_data', 86400, function () {
-            $skills = Skill::all();
-            $featuredProject = Project::where('is_featured', true)->first();
-            $topStacks = TechStack::limit(6)->get();
-            return view('home', compact('skills', 'featuredProject', 'topStacks'))->render();
+        $data = Cache::remember('home_data_v3', 86400, function () {
+            return [
+                'skills' => Skill::all(),
+                'featuredProject' => Project::where('is_featured', true)->first(),
+                'topStacks' => TechStack::limit(6)->get(),
+            ];
         });
+        return view('home', $data);
     }
 
     public function about()
     {
-        return Cache::remember('about_data', 86400, function () {
-            $experiences = Experience::orderBy('id', 'desc')->get();
-            $educations = Education::all();
-            $certifications = Certification::all();
-            $awards = Award::all();
-            return view('about', compact('experiences', 'educations', 'certifications', 'awards'))->render();
+        $data = Cache::remember('about_data_v3', 86400, function () {
+            return [
+                'experiences' => Experience::orderBy('id', 'desc')->get(),
+                'educations' => Education::all(),
+                'certifications' => Certification::all(),
+                'awards' => Award::all(),
+            ];
         });
+        return view('about', $data);
     }
 
     public function projects()
     {
-        return Cache::remember('projects_data', 86400, function () {
-            $projects = Project::all();
-            return view('projects', compact('projects'))->render();
+        $projects = Cache::remember('projects_data_v3', 86400, function () {
+            return Project::all();
         });
+        return view('projects', compact('projects'));
     }
 
     public function projectDetail($slug)
     {
-        return Cache::remember("project_detail_{$slug}", 86400, function () use ($slug) {
-            $project = Project::where('slug', $slug)->firstOrFail();
-            return view('project-detail', compact('project'))->render();
+        $project = Cache::remember("project_detail_v3_{$slug}", 86400, function () use ($slug) {
+            return Project::where('slug', $slug)->firstOrFail();
         });
+        return view('project-detail', compact('project'));
     }
 
     public function stack()
     {
-        return Cache::remember('stack_data', 86400, function () {
-            $stacks = TechStack::all();
-            return view('stack', compact('stacks'))->render();
+        $stacks = Cache::remember('stack_data_v3', 86400, function () {
+            return TechStack::all()->groupBy('category');
         });
+        return view('stack', compact('stacks'));
     }
 
     public function contact()

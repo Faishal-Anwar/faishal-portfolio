@@ -49,7 +49,7 @@
     <style>
         :root {
             --bg-primary: #ffffff; --bg-secondary: #fafafa; --text-main: #09090b; --text-muted: #71717a;
-            --border-subtle: #e4e4e7; --accent-glow: rgba(0, 0, 0, 0.05); --sidebar-w: 280px;
+            --border-subtle: #e4e4e7; --accent-glow: rgba(0, 0, 0, 0.05); --sidebar-w: 18rem;
             --grid-dot: rgba(0, 0, 0, 0.08);
         }
         html.dark {
@@ -57,80 +57,88 @@
             --border-subtle: #27272a; --accent-glow: rgba(255, 255, 255, 0.05);
             --grid-dot: rgba(255, 255, 255, 0.07);
         }
-        html { overflow-y: scroll; scrollbar-gutter: stable; }
+        
+        /* Global Scaling Logic */
+        html { 
+            overflow-y: scroll; 
+            scrollbar-gutter: stable; 
+            font-size: 16px; /* Base for Mobile */
+        }
+        
+        @media (min-width: 1024px) {
+            html { font-size: 20px; } /* 25% Larger on Desktop */
+            :root { --sidebar-w: 20rem; }
+        }
+
         body { 
             background: var(--bg-primary); 
             color: var(--text-main); 
             transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out; 
+            line-height: 1.6;
         }
-        button i { width: 1.25rem; height: 1.25rem; }
+        
         h1, h2, h3, h4 { font-family: 'Instrument Sans', sans-serif; letter-spacing: -0.02em; }
         
         .sidebar { 
             width: var(--sidebar-w); 
             background: var(--bg-secondary); 
             border-right: 1px solid var(--border-subtle); 
-            transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+            transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out, width 0.4s ease;
         }
         
         .glass-card { 
             background: var(--bg-primary); 
             border: 1px solid var(--border-subtle); 
             transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; 
-            border-radius: 1.5rem; 
+            border-radius: 1.25rem; 
         }
-        .glass-card:hover { border-color: var(--text-main); transform: translateY(-6px) scale(1.01); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
-        html.dark .glass-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .glass-card:hover { border-color: var(--text-main); transform: translateY(-0.4rem) scale(1.01); box-shadow: 0 1.5rem 3rem -0.75rem rgba(0,0,0,0.1); }
+        html.dark .glass-card:hover { box-shadow: 0 1.5rem 3rem -0.75rem rgba(0,0,0,0.5); }
 
-        .nav-link { color: var(--text-muted); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; font-size: 0.925rem; border-radius: 8px; padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.75rem; }
-        .nav-link:hover { color: var(--text-main); background: var(--accent-glow); transform: translateX(4px); }
+        .nav-link { color: var(--text-muted); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; font-size: 0.9rem; border-radius: 0.5rem; padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .nav-link:hover { color: var(--text-main); background: var(--accent-glow); transform: translateX(0.25rem); }
         .nav-link.active { font-weight: 600; color: var(--text-main); background: var(--accent-glow); }
 
-        .elite-grid { background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px); background-size: 32px 32px; }
+        .elite-grid { background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px); background-size: 2rem 2rem; }
         .main-content { opacity: 1; transition: opacity 0.6s ease; }
-        .mobile-nav-overlay { background: var(--bg-primary); position: fixed; inset: 0; z-index: 100; transform: translateX(100%); transition: 0.4s ease; }
-        .mobile-nav-overlay.open { transform: translateX(0); }
-
+        
         .project-card { 
             border: 1px solid var(--border-subtle); 
-            border-radius: 2rem; 
+            border-radius: 1.5rem; 
             overflow: hidden; 
             transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; 
             background: var(--bg-primary); 
         }
-        .project-card:hover { border-color: var(--text-main); transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.15); }
-        html.dark .project-card:hover { box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7); }
+        .project-card:hover { border-color: var(--text-main); transform: translateY(-0.5rem) scale(1.01); box-shadow: 0 2rem 4rem -1rem rgba(0,0,0,0.15); }
+        html.dark .project-card:hover { box-shadow: 0 2rem 4rem -1rem rgba(0,0,0,0.7); }
 
-        .stack-icon-mini { width: 32px; height: 32px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .stack-icon-mini { width: 2rem; height: 2rem; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .stack-icon-mini:hover { transform: scale(1.15) rotate(5deg); }
         
         .mobile-header { 
             background: var(--bg-primary); 
             border: 1px solid var(--border-subtle);
-            box-shadow: 0 4px 20px -5px rgba(0,0,0,0.1);
+            box-shadow: 0 0.25rem 1.25rem -0.3rem rgba(0,0,0,0.1);
             transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
         }
-        html.dark .mobile-header { border-color: rgba(255, 255, 255, 0.1); }
         
-        #theme-toggle-mobile { transition: all 0.3s ease; }
-        html.dark #theme-toggle-mobile { border-color: rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.03); }
-        .nav-link-mobile { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; border-radius: 1rem; transition: all 0.3s ease; color: var(--text-muted); }
-        .nav-link-mobile:hover { background: var(--accent-glow); transform: translateX(8px); }
+        .nav-link-mobile { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-radius: 0.75rem; transition: all 0.3s ease; color: var(--text-muted); }
+        .nav-link-mobile:hover { background: var(--accent-glow); transform: translateX(0.5rem); }
         .nav-link-mobile.active { background: var(--accent-glow); color: var(--text-main); font-weight: 700; }
         
         .typed-cursor { opacity: 1; animation: blink 0.7s infinite; font-weight: 300; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
 
         /* Timeline for About Page */
-        .timeline-item { border-left: 1px solid var(--border-subtle); padding-left: 2rem; position: relative; padding-bottom: 4rem; transition: all 0.4s ease; cursor: default; }
-        .timeline-item:hover { border-left-color: var(--text-main); background: var(--accent-glow); border-radius: 0 1rem 1rem 0; }
-        .timeline-dot { width: 10px; height: 10px; background: var(--text-main); border-radius: 99px; position: absolute; left: -5px; top: 8px; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .timeline-item { border-left: 1px solid var(--border-subtle); padding-left: 1.5rem; position: relative; padding-bottom: 3rem; transition: all 0.4s ease; cursor: default; }
+        .timeline-item:hover { border-left-color: var(--text-main); background: var(--accent-glow); border-radius: 0 0.75rem 0.75rem 0; }
+        .timeline-dot { width: 0.6rem; height: 0.6rem; background: var(--text-main); border-radius: 99px; position: absolute; left: -0.31rem; top: 0.5rem; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .timeline-item:hover .timeline-dot { transform: scale(1.5); }
 
         /* Stack Page Specifics */
-        .stack-card { border: 1px solid var(--border-subtle); border-radius: 1.5rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; padding: 2rem; background: var(--bg-primary); }
-        .stack-card:hover { border-color: var(--text-main); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
-        .stack-icon { transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); width: 40px; height: 40px; }
+        .stack-card { border: 1px solid var(--border-subtle); border-radius: 1rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; padding: 1.5rem; background: var(--bg-primary); }
+        .stack-card:hover { border-color: var(--text-main); transform: translateY(-0.25rem); box-shadow: 0 0.6rem 1.5rem -0.3rem rgba(0,0,0,0.05); }
+        .stack-icon { transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); width: 2.5rem; height: 2.5rem; }
         .stack-card:hover .stack-icon { transform: scale(1.2) rotate(8deg); }
 
         /* Form for Contact */
@@ -143,16 +151,17 @@
         
         <!-- Sidebar (Desktop) -->
         <aside class="sidebar fixed top-0 bottom-0 left-0 z-[60] hidden lg:flex flex-col p-10">
-            <div class="mb-10 text-main">
+            <div class="mb-10 text-main text-left">
                 @if($profile->image)
-                <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-full aspect-square rounded-3xl object-cover mb-8 shadow-sm">
+                <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-16 h-16 rounded-2xl object-cover mb-6 shadow-sm">
                 @else
-                <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-full aspect-square rounded-3xl object-cover mb-8 shadow-sm">
+                <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-16 h-16 rounded-2xl object-cover mb-6 shadow-sm">
                 @endif
-                <h1 class="text-3xl font-bold tracking-tight">{{ $profile->name }}</h1>
+                <h1 class="text-2xl font-bold tracking-tight">{{ $profile->name }}</h1>
+                <p class="text-xs text-muted font-bold uppercase tracking-widest mt-1">{{ $profile->title }}</p>
             </div>
             <div class="mb-8 text-left">
-                <a href="{{ route('download.cv') }}" download class="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-900 border border-black border-border-subtle dark:border-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors text-main">
+                <a href="{{ route('download.cv') }}" download class="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-900 border border-black border-border-subtle dark:border-white rounded-xl text-[0.7rem] font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors text-main">
                     <i data-lucide="download" class="w-3 h-3"></i> Download CV
                 </a>
             </div>
@@ -174,16 +183,16 @@
                     @if($profile->instagram_url) <a href="{{ $profile->instagram_url }}" target="_blank" class="text-muted hover:text-main transition-all duration-300 hover:-translate-y-1 hover:scale-110"><i data-lucide="instagram" class="w-5 h-5"></i></a> @endif
                 </div>
 
-                <!-- Theme Toggle (Refined Premium Style) -->
+                <!-- Theme Toggle -->
                 <button id="theme-toggle" class="flex items-center gap-3 group w-full text-left transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 bg-secondary border border-border-subtle rounded-xl flex items-center justify-center transition-all duration-300 group-hover:border-main group-hover:bg-main group-hover:text-primary">
                         <i data-lucide="sun" class="w-4 h-4 block dark:hidden transition-transform group-hover:rotate-12"></i>
                         <i data-lucide="moon" class="w-4 h-4 hidden dark:block transition-transform group-hover:-rotate-12"></i>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-muted group-hover:text-main transition-colors duration-300">Theme</span>
-                        <span class="text-[9px] font-medium uppercase tracking-widest text-muted/50 dark:hidden">Light Mode</span>
-                        <span class="text-[9px] font-medium uppercase tracking-widest text-muted/50 hidden dark:block">Dark Mode</span>
+                        <span class="text-[0.6rem] font-bold uppercase tracking-widest text-muted group-hover:text-main transition-colors duration-300">Theme</span>
+                        <span class="text-[0.55rem] font-medium uppercase tracking-widest text-muted/50 dark:hidden">Light Mode</span>
+                        <span class="text-[0.55rem] font-medium uppercase tracking-widest text-muted/50 hidden dark:block">Dark Mode</span>
                     </div>
                 </button>
             </div>
@@ -243,7 +252,7 @@
             </div>
         </div>
 
-        <main class="main-content flex-1 lg:ml-[280px] p-6 pt-24 sm:p-12 lg:p-24 elite-grid">
+        <main class="main-content flex-1 lg:ml-[var(--sidebar-w)] p-6 pt-24 sm:p-12 lg:p-20 elite-grid">
             @yield('content')
         </main>
     </div>
