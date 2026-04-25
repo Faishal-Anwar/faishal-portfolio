@@ -57,18 +57,32 @@
             --border-subtle: #27272a; --accent-glow: rgba(255, 255, 255, 0.05);
             --grid-dot: rgba(255, 255, 255, 0.07);
         }
-        html { overflow-y: scroll; }
-        body { background: var(--bg-primary); color: var(--text-main); transition: background-color 0.4s; }
+        html { overflow-y: scroll; scrollbar-gutter: stable; }
+        body { 
+            background: var(--bg-primary); 
+            color: var(--text-main); 
+            transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out; 
+        }
         button i { width: 1.25rem; height: 1.25rem; }
         h1, h2, h3, h4 { font-family: 'Instrument Sans', sans-serif; letter-spacing: -0.02em; }
         
-        .sidebar { width: var(--sidebar-w); background: var(--bg-secondary); border-right: 1px solid var(--border-subtle); }
+        .sidebar { 
+            width: var(--sidebar-w); 
+            background: var(--bg-secondary); 
+            border-right: 1px solid var(--border-subtle); 
+            transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+        }
         
-        .glass-card { background: var(--bg-primary); border: 1px solid var(--border-subtle); transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); border-radius: 1.5rem; }
+        .glass-card { 
+            background: var(--bg-primary); 
+            border: 1px solid var(--border-subtle); 
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; 
+            border-radius: 1.5rem; 
+        }
         .glass-card:hover { border-color: var(--text-main); transform: translateY(-6px) scale(1.01); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
         html.dark .glass-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
 
-        .nav-link { color: var(--text-muted); transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; font-size: 0.925rem; border-radius: 8px; padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.75rem; }
+        .nav-link { color: var(--text-muted); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; font-size: 0.925rem; border-radius: 8px; padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.75rem; }
         .nav-link:hover { color: var(--text-main); background: var(--accent-glow); transform: translateX(4px); }
         .nav-link.active { font-weight: 600; color: var(--text-main); background: var(--accent-glow); }
 
@@ -77,7 +91,13 @@
         .mobile-nav-overlay { background: var(--bg-primary); position: fixed; inset: 0; z-index: 100; transform: translateX(100%); transition: 0.4s ease; }
         .mobile-nav-overlay.open { transform: translateX(0); }
 
-        .project-card { border: 1px solid var(--border-subtle); border-radius: 2rem; overflow: hidden; transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); background: var(--bg-primary); }
+        .project-card { 
+            border: 1px solid var(--border-subtle); 
+            border-radius: 2rem; 
+            overflow: hidden; 
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; 
+            background: var(--bg-primary); 
+        }
         .project-card:hover { border-color: var(--text-main); transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.15); }
         html.dark .project-card:hover { box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7); }
 
@@ -88,7 +108,12 @@
             background: var(--bg-primary); 
             border: 1px solid var(--border-subtle);
             box-shadow: 0 4px 20px -5px rgba(0,0,0,0.1);
+            transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
         }
+        html.dark .mobile-header { border-color: rgba(255, 255, 255, 0.1); }
+        
+        #theme-toggle-mobile { transition: all 0.3s ease; }
+        html.dark #theme-toggle-mobile { border-color: rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.03); }
         .nav-link-mobile { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; border-radius: 1rem; transition: all 0.3s ease; color: var(--text-muted); }
         .nav-link-mobile:hover { background: var(--accent-glow); transform: translateX(8px); }
         .nav-link-mobile.active { background: var(--accent-glow); color: var(--text-main); font-weight: 700; }
@@ -103,7 +128,7 @@
         .timeline-item:hover .timeline-dot { transform: scale(1.5); }
 
         /* Stack Page Specifics */
-        .stack-card { border: 1px solid var(--border-subtle); border-radius: 1.5rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 2rem; background: var(--bg-primary); }
+        .stack-card { border: 1px solid var(--border-subtle); border-radius: 1.5rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease-in-out, border-color 0.4s ease-in-out; padding: 2rem; background: var(--bg-primary); }
         .stack-card:hover { border-color: var(--text-main); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
         .stack-icon { transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); width: 40px; height: 40px; }
         .stack-card:hover .stack-icon { transform: scale(1.2) rotate(8deg); }
@@ -167,16 +192,16 @@
         <!-- Header (Mobile) -->
         <header class="lg:hidden fixed top-6 left-6 right-6 z-[60] mobile-header rounded-2xl h-16 flex items-center px-4 backdrop-blur-md bg-white/70 dark:bg-black/70">
             <div class="flex justify-between items-center w-full font-bold">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 text-left">
                     @if($profile->image)
-                    <img src="{{ asset('storage/' . $profile->image) }}" alt="Profile" class="w-8 h-8 rounded-full object-cover">
+                    <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     @else
                     <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-8 h-8 rounded-full object-cover">
                     @endif
                     <span class="font-bold tracking-tight text-base text-main">{{ $profile->name }}</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button id="theme-toggle-mobile" class="w-10 h-10 flex items-center justify-center text-main bg-secondary/50 rounded-xl border border-border-subtle/50">
+                    <button id="theme-toggle-mobile" class="w-10 h-10 flex items-center justify-center text-main bg-secondary/50 rounded-xl border border-border-subtle/50 transition-all hover:scale-105 active:scale-95">
                         <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
                         <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
                     </button>
@@ -190,7 +215,7 @@
             <div class="flex justify-between items-center mb-12 text-left">
                 <div class="flex items-center gap-3">
                     @if($profile->image)
-                    <img src="{{ asset('storage/' . $profile->image) }}" alt="Profile" class="w-10 h-10 rounded-full object-cover">
+                    <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-10 h-10 rounded-full object-cover">
                     @else
                     <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover">
                     @endif
