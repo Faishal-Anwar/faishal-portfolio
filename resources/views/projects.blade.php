@@ -27,7 +27,8 @@
                 <div class="aspect-video bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center overflow-hidden relative border-b border-border-subtle">
                      <div class="absolute inset-0 elite-grid opacity-10"></div>
                     @if($project->image)
-                    <img src="{{ strpos($project->image, 'http') === 0 ? $project->image : asset('storage/' . $project->image) }}" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="{{ $project->title }}">
+                    @php $projImg = \App\Helpers\CloudinaryHelper::optimize($project->image, 600); @endphp
+                    <img src="{{ strpos($project->image, 'http') === 0 ? $projImg : asset('storage/' . $project->image) }}" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="{{ $project->title }}" loading="lazy">
                     @else
                     <i data-lucide="{{ $project->icon }}" class="w-16 h-16 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
                     @endif

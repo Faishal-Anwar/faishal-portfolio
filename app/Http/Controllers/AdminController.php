@@ -26,7 +26,17 @@ class AdminController extends Controller
 
     private function clearPublicCache()
     {
-        Cache::flush();
+        Cache::forget('global.profile');
+        Cache::forget('page.home');
+        Cache::forget('page.about');
+        Cache::forget('page.projects');
+        Cache::forget('page.stack');
+
+        // Clear individual project detail caches
+        $projects = Project::select('slug')->get();
+        foreach ($projects as $project) {
+            Cache::forget("page.project.{$project->slug}");
+        }
     }
 
     public function dashboard()

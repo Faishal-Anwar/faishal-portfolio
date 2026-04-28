@@ -21,9 +21,9 @@ class PublicController extends Controller
 {
     public function home()
     {
-        $data = Cache::remember('home_data_v3', 86400, function () {
+        $data = Cache::remember('page.home', 3600, function () {
             return [
-                'skills' => Skill::all(),
+                'coreSkills' => Skill::all(),
                 'featuredProject' => Project::where('is_featured', true)->first(),
                 'topStacks' => TechStack::limit(6)->get(),
             ];
@@ -33,7 +33,7 @@ class PublicController extends Controller
 
     public function about()
     {
-        $data = Cache::remember('about_data_v3', 86400, function () {
+        $data = Cache::remember('page.about', 3600, function () {
             return [
                 'experiences' => Experience::orderBy('id', 'desc')->get(),
                 'educations' => Education::all(),
@@ -46,7 +46,7 @@ class PublicController extends Controller
 
     public function projects()
     {
-        $projects = Cache::remember('projects_data_v3', 86400, function () {
+        $projects = Cache::remember('page.projects', 3600, function () {
             return Project::all();
         });
         return view('projects', compact('projects'));
@@ -54,7 +54,7 @@ class PublicController extends Controller
 
     public function projectDetail($slug)
     {
-        $project = Cache::remember("project_detail_v3_{$slug}", 86400, function () use ($slug) {
+        $project = Cache::remember("page.project.{$slug}", 3600, function () use ($slug) {
             return Project::where('slug', $slug)->firstOrFail();
         });
         return view('project-detail', compact('project'));
@@ -62,7 +62,7 @@ class PublicController extends Controller
 
     public function stack()
     {
-        $stacks = Cache::remember('stack_data_v3', 86400, function () {
+        $stacks = Cache::remember('page.stack', 3600, function () {
             return TechStack::all()->groupBy('category');
         });
         return view('stack', compact('stacks'));
@@ -75,6 +75,11 @@ class PublicController extends Controller
 
     public function storeInquiry(Request $request)
     {
+        // Honeypot anti-spam check
+        if ($request->filled('honeypot')) {
+            return back()->with('success', 'Your message has been sent successfully!'); // Silent fail for bots
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -87,7 +92,7 @@ class PublicController extends Controller
         try {
             Mail::to('anwarfaishal86@gmail.com')->send(new InquiryNotification($inquiry));
         } catch (\Exception $e) {
-            // Silently fail if mail fails
+            \Illuminate\Support\Facades\Log::error('Inquiry Mail Failed: ' . $e->getMessage());
         }
 
         return back()->with('success', 'Your message has been sent successfully!');

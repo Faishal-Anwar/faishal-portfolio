@@ -1,61 +1,77 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "public/index.php",
-            "use": "vercel-php@0.7.4"
+    "framework": null,
+    "functions": {
+        "api/index.php": {
+            "runtime": "vercel-php@0.8.0",
+            "maxDuration": 10
         }
-    ],
-    "outputDirectory": "public",
+    },
     "routes": [
         {
             "src": "/build/(.*)",
-            "headers": { "cache-control": "public, max-age=31536000, immutable" },
-            "dest": "/public/build/$1"
+            "dest": "/public/build/$1",
+            "headers": {
+                "Cache-Control": "public, max-age=31536000, immutable",
+                "X-Content-Type-Options": "nosniff"
+            }
         },
         {
             "src": "/assets/(.*)",
-            "headers": { "cache-control": "public, max-age=31536000, immutable" },
-            "dest": "/public/assets/$1"
+            "dest": "/public/assets/$1",
+            "headers": {
+                "Cache-Control": "public, max-age=31536000, immutable",
+                "X-Content-Type-Options": "nosniff"
+            }
+        },
+        {
+            "src": "/images/(.*)",
+            "dest": "/public/images/$1",
+            "headers": {
+                "Cache-Control": "public, max-age=86400",
+                "X-Content-Type-Options": "nosniff"
+            }
+        },
+        {
+            "src": ".*\\.(woff2?|ttf|otf|eot)$",
+            "headers": {
+                "Cache-Control": "public, max-age=31536000, immutable"
+            }
         },
         {
             "src": "/favicon.ico",
-            "dest": "/public/favicon.ico"
+            "dest": "/public/favicon.ico",
+            "headers": {
+                "Cache-Control": "public, max-age=86400"
+            }
+        },
+        {
+            "src": "/robots.txt",
+            "dest": "/public/robots.txt"
+        },
+        {
+            "handle": "filesystem"
         },
         {
             "src": "/(.*)",
-            "dest": "/public/index.php"
+            "dest": "/api/index.php",
+            "headers": {
+                "X-Content-Type-Options": "nosniff",
+                "X-Frame-Options": "DENY",
+                "Referrer-Policy": "strict-origin-when-cross-origin"
+            }
         }
     ],
+    "outputDirectory": "public",
     "env": {
-        "APP_NAME": "Portfolio Faishal",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://faishal-portfolio-blue.vercel.app",
-        "ASSET_URL": "https://faishal-portfolio-blue.vercel.app",
-        "APP_KEY": "base64:667PJgX9TmOkB5BGVWwoBoMUBHO2kFe4quCTWR93vAY=",
-        
-        "LOG_CHANNEL": "stderr",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "db-portfolio-faishal-anwar.c.aivencloud.com",
-        "DB_PORT": "21931",
-        "DB_DATABASE": "defaultdb",
-        "DB_USERNAME": "avnadmin",
-
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "VIEW_COMPILED_PATH": "/tmp/views",
         "CACHE_STORE": "database",
-        "QUEUE_CONNECTION": "sync",
-        "SESSION_DRIVER": "cookie",
-        "SESSION_LIFETIME": "120",
-
-        "MAIL_MAILER": "smtp",
-        "MAIL_HOST": "smtp.gmail.com",
-        "MAIL_PORT": "587",
-        "MAIL_USERNAME": "anwarfaishal86@gmail.com",
-        "MAIL_ENCRYPTION": "tls",
-        "MAIL_FROM_ADDRESS": "anwarfaishal86@gmail.com",
-        "MAIL_FROM_NAME": "Faishal Anwar",
-
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CLOUDINARY_CLOUD_NAME": "dl42whxjg"
+        "SESSION_DRIVER": "database",
+        "LOG_CHANNEL": "stderr"
     }
 }

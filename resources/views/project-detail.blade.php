@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-<div class="max-w-5xl mx-auto space-y-24">
+<div class="max-w-5xl mx-auto space-y-24 overflow-hidden">
     <section data-aos="fade-up" class="space-y-8 pt-8 text-main">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
             <a href="{{ route('projects') }}" class="flex items-center gap-2 text-muted hover:text-main transition-colors uppercase text-[10px] font-bold tracking-widest"><i data-lucide="arrow-left" class="w-4 h-4 text-main"></i> Back to Projects</a>
@@ -35,7 +35,7 @@
         
         <div class="space-y-4 text-left">
             <h2 class="text-5xl sm:text-7xl font-bold tracking-tighter text-main uppercase">{{ $project->title }}</h2>
-            <p class="text-xl text-muted max-w-3xl font-light leading-relaxed">{{ $project->description }}</p>
+            <p class="text-lg sm:text-xl text-muted max-w-3xl font-light leading-relaxed break-words">{{ $project->description }}</p>
         </div>
 
         <!-- Slider Section -->
@@ -45,7 +45,8 @@
                     <div class="swiper-wrapper">
                         @foreach($project->gallery as $image)
                         <div class="swiper-slide">
-                            <img src="{{ strpos($image, 'http') === 0 ? $image : asset('storage/' . $image) }}" alt="Project image" class="w-full h-full object-cover">
+                            @php $galleryImg = \App\Helpers\CloudinaryHelper::optimize($image, 1200); @endphp
+                            <img src="{{ strpos($image, 'http') === 0 ? $galleryImg : asset('storage/' . $image) }}" alt="Project image" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         @endforeach
                     </div>
@@ -54,7 +55,8 @@
                     <div class="swiper-pagination"></div>
                 </div>
             @elseif($project->image)
-                <img src="{{ strpos($project->image, 'http') === 0 ? $project->image : asset('storage/' . $project->image) }}" class="w-full h-full object-cover" alt="{{ $project->title }}">
+                @php $detailImg = \App\Helpers\CloudinaryHelper::optimize($project->image, 1200); @endphp
+                <img src="{{ strpos($project->image, 'http') === 0 ? $detailImg : asset('storage/' . $project->image) }}" class="w-full h-full object-cover" alt="{{ $project->title }}" loading="lazy">
             @else
                 <div class="w-full h-full flex items-center justify-center opacity-10">
                     <div class="absolute inset-0 elite-grid"></div>
@@ -68,7 +70,7 @@
         <div class="lg:col-span-2 space-y-12">
             <section class="space-y-6">
                 <h3 class="text-2xl font-bold text-main">Case Study</h3>
-                <div class="text-muted leading-relaxed text-justify text-main whitespace-pre-line">
+                <div class="text-muted leading-relaxed text-justify text-main whitespace-pre-line break-words">
                     {{ $project->case_study ?? 'Case study content coming soon...' }}
                 </div>
             </section>
@@ -99,12 +101,12 @@
     </div>
 
     <!-- CTA Section -->
-    <section data-aos="zoom-in" class="glass-card p-16 text-center space-y-8 elite-grid text-main">
-        <h2 class="text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main uppercase">Interested in this project?</h2>
-        <a href="{{ route('contact') }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-[1.05] inline-block uppercase text-xs tracking-widest text-main">Let's Talk</a>
+    <section data-aos="zoom-in" class="glass-card p-8 sm:p-16 text-center space-y-6 sm:space-y-8 elite-grid text-main">
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main uppercase">Interested in this project?</h2>
+        <a href="{{ route('contact') }}" class="px-8 sm:px-10 py-4 sm:py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-[1.05] inline-block uppercase text-xs tracking-widest">Let's Talk</a>
     </section>
 
-    <footer class="py-20 border-t border-border-subtle text-center text-[10px] font-bold tracking-widest uppercase text-muted opacity-50 text-main">
+    <footer class="py-20 border-t border-border-subtle text-center text-[10px] font-bold tracking-widest uppercase text-muted opacity-50">
         © 2025 by Faishal. All rights reserved.
     </footer>
 </div>

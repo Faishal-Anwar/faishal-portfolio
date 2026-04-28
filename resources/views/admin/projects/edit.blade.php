@@ -33,7 +33,7 @@
                     <label class="text-[10px] font-bold uppercase tracking-widest text-muted ml-1">Project Thumbnail</label>
                     @if($project->image)
                     <div class="mb-4">
-                        <img src="{{ asset('storage/' . $project->image) }}" class="w-40 h-24 object-cover rounded-xl border border-border-subtle" alt="Current Thumbnail">
+                        <img src="{{ strpos($project->image, 'http') === 0 ? $project->image : asset('storage/' . $project->image) }}" class="w-40 h-24 object-cover rounded-xl border border-border-subtle" alt="Current Thumbnail">
                         <p class="text-[9px] text-muted uppercase mt-2">Current Thumbnail</p>
                     </div>
                     @endif
@@ -47,7 +47,7 @@
                     @if($project->gallery)
                     <div class="flex gap-4 mb-4 overflow-x-auto pb-2">
                         @foreach($project->gallery as $img)
-                        <img src="{{ asset('storage/' . $img) }}" class="w-24 h-16 object-cover rounded-lg border border-border-subtle shrink-0">
+                        <img src="{{ strpos($img, 'http') === 0 ? $img : asset('storage/' . $img) }}" class="w-24 h-16 object-cover rounded-lg border border-border-subtle shrink-0">
                         @endforeach
                     </div>
                     @endif

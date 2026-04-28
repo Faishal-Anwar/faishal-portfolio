@@ -1,1 +1,19 @@
-/vendor
+# Dependencies
+node_modules/
+
+# Development files
+tests/
+storage/logs/
+.env.example
+.editorconfig
+.gitattributes
+phpunit.xml
+README.md
+backup_static/
+
+# Version control
+.git/
+
+# IDE
+.vscode/
+.idea/

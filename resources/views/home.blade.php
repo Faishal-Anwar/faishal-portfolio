@@ -28,11 +28,11 @@
     </div>
 
     <section class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
-        @foreach($skills as $skill)
+        @foreach($coreSkills as $skill)
         <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
             <div class="glass-card p-10 space-y-6 group h-full">
-                <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform text-main">
-                    <i data-lucide="{{ $skill->icon }}" class="w-7 h-7 text-main"></i>
+                <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i data-lucide="{{ $skill->icon }}" class="w-7 h-7 text-zinc-900 dark:text-zinc-100"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-main">{{ $skill->title }}</h3>
                 <p class="text-base text-muted leading-relaxed">{{ $skill->description }}</p>
@@ -47,28 +47,28 @@
             <div class="glass-card p-12 elite-grid">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 text-left">
                     <div class="flex gap-8">
-                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="graduation-cap" class="w-7 h-7 text-main"></i></div>
+                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="graduation-cap" class="w-7 h-7 text-zinc-900 dark:text-zinc-100"></i></div>
                         <div>
                             <h4 class="font-bold text-xl text-main">Education</h4>
                             <p class="text-base text-muted mt-1">Undergraduate Student, Technical Informatics<br>UNISSULA • Present</p>
                         </div>
                     </div>
                     <div class="flex gap-8">
-                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="briefcase" class="w-7 h-7 text-main"></i></div>
+                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="briefcase" class="w-7 h-7 text-zinc-900 dark:text-zinc-100"></i></div>
                         <div>
                             <h4 class="font-bold text-xl text-main">Experience</h4>
                             <p class="text-base text-muted mt-1">Practicum Assistant (Algorithms & Basic Programming)<br>UNISSULA • Past</p>
                         </div>
                     </div>
                     <div class="flex gap-8">
-                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="book-open" class="w-7 h-7 text-main"></i></div>
+                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="book-open" class="w-7 h-7 text-zinc-900 dark:text-zinc-100"></i></div>
                         <div>
                             <h4 class="font-bold text-xl text-main">Non-Formal Education</h4>
                             <p class="text-base text-muted mt-1">IDCamp Facilitator for Gen AI<br>IDCamp • 2026</p>
                         </div>
                     </div>
                     <div class="flex gap-8">
-                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="award" class="w-7 h-7 text-main"></i></div>
+                        <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center shrink-0"><i data-lucide="award" class="w-7 h-7 text-zinc-900 dark:text-zinc-100"></i></div>
                         <div>
                             <h4 class="font-bold text-xl text-main">Certification</h4>
                             <p class="text-base text-muted mt-1">Google Student Ambassador<br>Google • 2026</p>
@@ -90,7 +90,8 @@
                 <div class="aspect-square lg:aspect-auto bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center overflow-hidden relative border-r border-border-subtle">
                      <div class="absolute inset-0 elite-grid opacity-10"></div>
                     @if($featuredProject->image)
-                    <img src="{{ strpos($featuredProject->image, 'http') === 0 ? $featuredProject->image : asset('storage/' . $featuredProject->image) }}" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="{{ $featuredProject->title }}">
+                    @php $featImg = \App\Helpers\CloudinaryHelper::optimize($featuredProject->image, 800); @endphp
+                    <img src="{{ strpos($featuredProject->image, 'http') === 0 ? $featImg : asset('storage/' . $featuredProject->image) }}" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="{{ $featuredProject->title }}" loading="lazy">
                     @else
                     <i data-lucide="{{ $featuredProject->icon }}" class="w-40 h-40 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
                     @endif                </div>
@@ -106,7 +107,7 @@
                         @endforeach
                     </div>
                     <div class="pt-10 border-t border-border-subtle">
-                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-sm tracking-widest">View Case Study</a>
+                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-sm tracking-widest">View Project</a>
                     </div>
                 </div>
             </div>
@@ -124,7 +125,7 @@
                 <div class="grid grid-cols-3 sm:grid-cols-6 gap-12 items-center justify-items-center">
                     @foreach($topStacks as $stack)
                     <div class="group flex flex-col items-center gap-4">
-                        <img src="{{ $stack->icon_url }}" class="stack-icon-mini" alt="{{ $stack->name }}">
+                        <img src="{{ $stack->icon_url }}" class="stack-icon-mini" alt="{{ $stack->name }}" loading="lazy">
                         <span class="text-xs font-bold text-muted uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">{{ $stack->name }}</span>
                     </div>
                     @endforeach
@@ -147,19 +148,3 @@
 </div>
 @endsection
 
-@section('scripts')
-<script>
-    try {
-        if (window.Typed && document.getElementById('typed-text')) {
-            new Typed('#typed-text', {
-                strings: ["Machine Learning Engineer", "Data Engineer", "Cloud Architect"],
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 1500,
-                startDelay: 500,
-                loop: true
-            });
-        }
-    } catch (e) { console.error(e); }
-</script>
-@endsection
