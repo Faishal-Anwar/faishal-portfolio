@@ -19,7 +19,7 @@
 /public/storage
 /storage/*.key
 /storage/pail
-/vendor
+# /vendor  ← included for Vercel (PHP runtime doesn't run composer install)
 _ide_helper.php
 Homestead.json
 Homestead.yaml
