@@ -3,7 +3,7 @@
     "framework": null,
     "functions": {
         "api/index.php": {
-            "runtime": "vercel-php@0.8.0",
+            "runtime": "vercel-php@0.9.0",
             "maxDuration": 10
         }
     },
@@ -12,66 +12,39 @@
             "src": "/build/(.*)",
             "dest": "/public/build/$1",
             "headers": {
-                "Cache-Control": "public, max-age=31536000, immutable",
-                "X-Content-Type-Options": "nosniff"
-            }
-        },
-        {
-            "src": "/assets/(.*)",
-            "dest": "/public/assets/$1",
-            "headers": {
-                "Cache-Control": "public, max-age=31536000, immutable",
-                "X-Content-Type-Options": "nosniff"
+                "Cache-Control": "public, max-age=31536000, immutable"
             }
         },
         {
             "src": "/images/(.*)",
             "dest": "/public/images/$1",
             "headers": {
-                "Cache-Control": "public, max-age=86400",
-                "X-Content-Type-Options": "nosniff"
-            }
-        },
-        {
-            "src": ".*\\.(woff2?|ttf|otf|eot)$",
-            "headers": {
-                "Cache-Control": "public, max-age=31536000, immutable"
+                "Cache-Control": "public, max-age=86400"
             }
         },
         {
             "src": "/favicon.ico",
-            "dest": "/public/favicon.ico",
-            "headers": {
-                "Cache-Control": "public, max-age=86400"
-            }
+            "dest": "/public/favicon.ico"
         },
         {
             "src": "/robots.txt",
             "dest": "/public/robots.txt"
         },
         {
-            "handle": "filesystem"
-        },
-        {
             "src": "/(.*)",
-            "dest": "/api/index.php",
-            "headers": {
-                "X-Content-Type-Options": "nosniff",
-                "X-Frame-Options": "DENY",
-                "Referrer-Policy": "strict-origin-when-cross-origin"
-            }
+            "dest": "/api/index.php"
         }
     ],
-    "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
         "APP_ROUTES_CACHE": "/tmp/routes.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "VIEW_COMPILED_PATH": "/tmp/views",
-        "CACHE_STORE": "database",
-        "SESSION_DRIVER": "database",
+        "CACHE_DRIVER": "array",
+        "SESSION_DRIVER": "cookie",
         "LOG_CHANNEL": "stderr"
     }
 }
