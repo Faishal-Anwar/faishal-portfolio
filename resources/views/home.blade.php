@@ -96,19 +96,19 @@
                     <i data-lucide="{{ $featuredProject->icon }}" class="w-24 h-24 sm:w-40 sm:h-40 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
                     @endif
                 </div>
-                <div class="p-8 sm:p-16 space-y-8 sm:space-y-10 flex flex-col justify-center text-left">
-                    <div class="space-y-4 sm:space-y-6">
-                        <span class="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-[0.2em]">MOST RECENT</span>
-                        <h4 class="text-3xl sm:text-5xl font-bold tracking-tight text-main uppercase">{{ $featuredProject->title }}</h4>
-                        <p class="text-base sm:text-xl text-muted leading-relaxed font-light text-justify">{{ $featuredProject->description }}</p>
+                <div class="p-6 sm:p-12 lg:p-16 space-y-6 sm:space-y-8 flex flex-col justify-center text-left">
+                    <div class="space-y-3 sm:space-y-4">
+                        <span class="text-[9px] sm:text-[10px] font-bold text-muted uppercase tracking-[0.2em]">MOST RECENT</span>
+                        <h4 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-main uppercase leading-tight">{{ $featuredProject->title }}</h4>
+                        <p class="text-sm sm:text-base lg:text-lg text-muted leading-relaxed font-light text-justify">{{ $featuredProject->description }}</p>
                     </div>
-                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                    <div class="flex flex-wrap gap-2">
                         @foreach($featuredProject->tags as $tag)
-                        <span class="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-widest border border-border-subtle px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg">{{ $tag }}</span>
+                        <span class="text-[8px] sm:text-[9px] font-bold text-muted uppercase tracking-widest border border-border-subtle px-2 py-1 rounded-md">{{ $tag }}</span>
                         @endforeach
                     </div>
-                    <div class="pt-8 sm:pt-10 border-t border-border-subtle">
-                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="w-full sm:w-auto text-center px-8 sm:px-10 py-4 sm:py-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-[10px] sm:text-sm tracking-widest">View Project</a>
+                    <div class="pt-6 sm:pt-8 border-t border-border-subtle">
+                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="w-full sm:w-auto text-center px-8 py-3.5 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-[9px] sm:text-xs tracking-widest">View Project</a>
                     </div>
                 </div>
             </div>
