@@ -87,28 +87,28 @@
     <div data-aos="fade-up">
         <section class="space-y-12 sm:space-y-16">
             <h2 class="font-bold tracking-tight uppercase text-muted text-xs tracking-[0.3em] text-left">Featured Project</h2>
-            <div class="project-card group grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
-                <div class="aspect-video lg:aspect-auto bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center overflow-hidden relative border-b lg:border-b-0 lg:border-r border-border-subtle p-8 sm:p-12 lg:p-16">
-                     <div class="absolute inset-0 elite-grid opacity-10"></div>
+            <div class="project-card group grid grid-cols-1 lg:grid-cols-2 overflow-hidden border border-border-subtle rounded-3xl">
+                <div class="aspect-video lg:aspect-auto bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center overflow-hidden relative border-b lg:border-b-0 lg:border-r border-border-subtle">
                     @if($featuredProject->image)
-                    <img src="{{ strpos($featuredProject->image, 'http') === 0 ? $featuredProject->image : asset('storage/' . $featuredProject->image) }}" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 drop-shadow-2xl" alt="{{ $featuredProject->title }}">
+                    <img src="{{ strpos($featuredProject->image, 'http') === 0 ? $featuredProject->image : asset('storage/' . $featuredProject->image) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="{{ $featuredProject->title }}">
                     @else
-                    <i data-lucide="{{ $featuredProject->icon }}" class="w-24 h-24 sm:w-40 sm:h-40 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
+                    <div class="absolute inset-0 elite-grid opacity-10"></div>
+                    <i data-lucide="{{ $featuredProject->icon }}" class="w-20 h-20 sm:w-32 sm:h-32 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
                     @endif
                 </div>
-                <div class="p-6 sm:p-12 lg:p-16 space-y-6 sm:space-y-8 flex flex-col justify-center text-left">
-                    <div class="space-y-3 sm:space-y-4">
-                        <span class="text-[9px] sm:text-[10px] font-bold text-muted uppercase tracking-[0.2em]">MOST RECENT</span>
-                        <h4 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-main uppercase leading-tight">{{ $featuredProject->title }}</h4>
-                        <p class="text-sm sm:text-base lg:text-lg text-muted leading-relaxed font-light text-justify">{{ $featuredProject->description }}</p>
+                <div class="p-6 sm:p-10 lg:p-14 space-y-5 sm:space-y-6 flex flex-col justify-center text-left">
+                    <div class="space-y-2 sm:space-y-3">
+                        <span class="text-[9px] sm:text-[10px] font-bold text-muted uppercase tracking-[0.2em]">Featured Project</span>
+                        <h4 class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-main leading-tight">{{ $featuredProject->title }}</h4>
+                        <p class="text-xs sm:text-sm lg:text-base text-muted leading-relaxed font-light text-justify line-clamp-3 sm:line-clamp-none">{{ $featuredProject->description }}</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         @foreach($featuredProject->tags as $tag)
                         <span class="text-[8px] sm:text-[9px] font-bold text-muted uppercase tracking-widest border border-border-subtle px-2 py-1 rounded-md">{{ $tag }}</span>
                         @endforeach
                     </div>
-                    <div class="pt-6 sm:pt-8 border-t border-border-subtle">
-                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="w-full sm:w-auto text-center px-8 py-3.5 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-[9px] sm:text-xs tracking-widest">View Project</a>
+                    <div class="pt-5 sm:pt-6 border-t border-border-subtle">
+                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="w-full sm:w-auto text-center px-8 py-3 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-[9px] sm:text-xs tracking-widest">View Project</a>
                     </div>
                 </div>
             </div>
