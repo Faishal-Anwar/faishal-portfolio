@@ -4,8 +4,11 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Register the Composer autoloader...
+require __DIR__ . '/../vendor/autoload.php';
+
 // Determine if we are running on Vercel
-$isVercel = env('VERCEL') || env('NOW_REGION');
+$isVercel = getenv('VERCEL') || getenv('NOW_REGION');
 
 if ($isVercel) {
     // Ensure the storage directories exist in /tmp
@@ -30,9 +33,6 @@ if ($isVercel) {
     putenv('APP_EVENTS_CACHE=/tmp/storage/framework/cache/events.php');
     putenv('APP_PACKAGES_CACHE=/tmp/storage/framework/cache/packages.php');
 }
-
-// Register the Composer autoloader...
-require __DIR__ . '/../vendor/autoload.php';
 
 // Bootstrap Laravel and handle the request...
 $app = require_once __DIR__ . '/../bootstrap/app.php';
