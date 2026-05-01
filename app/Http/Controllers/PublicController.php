@@ -21,50 +21,38 @@ class PublicController extends Controller
 {
     public function home()
     {
-        $data = Cache::remember('home_data_v3', 86400, function () {
-            return [
-                'skills' => Skill::all(),
-                'featuredProject' => Project::where('is_featured', true)->first(),
-                'topStacks' => TechStack::limit(6)->get(),
-            ];
-        });
-        return view('home', $data);
+        return view('home', [
+            'coreSkills' => Skill::all(),
+            'featuredProject' => Project::where('is_featured', true)->first(),
+            'topStacks' => TechStack::limit(6)->get(),
+        ]);
     }
 
     public function about()
     {
-        $data = Cache::remember('about_data_v3', 86400, function () {
-            return [
-                'experiences' => Experience::orderBy('id', 'desc')->get(),
-                'educations' => Education::all(),
-                'certifications' => Certification::all(),
-                'awards' => Award::all(),
-            ];
-        });
-        return view('about', $data);
+        return view('about', [
+            'experiences' => Experience::orderBy('id', 'desc')->get(),
+            'educations' => Education::all(),
+            'certifications' => Certification::all(),
+            'awards' => Award::all(),
+        ]);
     }
 
     public function projects()
     {
-        $projects = Cache::remember('projects_data_v3', 86400, function () {
-            return Project::all();
-        });
+        $projects = Project::all();
         return view('projects', compact('projects'));
     }
 
     public function projectDetail($slug)
     {
-        $project = Cache::remember("project_detail_v3_{$slug}", 86400, function () use ($slug) {
-            return Project::where('slug', $slug)->firstOrFail();
-        });
+        $project = Project::where('slug', $slug)->firstOrFail();
         return view('project-detail', compact('project'));
     }
 
     public function stack()
     {
-        $stacks = Cache::remember('stack_data_v3', 86400, function () {
-            return TechStack::all()->groupBy('category');
-        });
+        $stacks = TechStack::all()->groupBy('category');
         return view('stack', compact('stacks'));
     }
 
@@ -75,6 +63,11 @@ class PublicController extends Controller
 
     public function storeInquiry(Request $request)
     {
+        // Honeypot anti-spam check
+        if ($request->filled('honeypot')) {
+            return back()->with('success', 'Your message has been sent successfully!'); // Silent fail for bots
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -87,7 +80,7 @@ class PublicController extends Controller
         try {
             Mail::to('anwarfaishal86@gmail.com')->send(new InquiryNotification($inquiry));
         } catch (\Exception $e) {
-            // Silently fail if mail fails
+            \Illuminate\Support\Facades\Log::error('Inquiry Mail Failed: ' . $e->getMessage());
         }
 
         return back()->with('success', 'Your message has been sent successfully!');

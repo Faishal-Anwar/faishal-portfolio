@@ -86,6 +86,9 @@
         <div class="glass-card p-10 lg:p-12 text-left">
             <form action="{{ route('contact.store') }}" method="POST" class="space-y-8">
                 @csrf
+                <div style="display: none;">
+                    <input type="text" name="honeypot" value="">
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                     <div class="space-y-3">
                         <label class="text-[10px] font-bold uppercase tracking-widest text-muted ml-1">Name</label>
@@ -95,6 +98,10 @@
                         <label class="text-[10px] font-bold uppercase tracking-widest text-muted ml-1">Email</label>
                         <input type="email" name="email" placeholder="budi@gmail.com" required class="form-input">
                     </div>
+                </div>
+                <div class="space-y-3 text-left">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-muted ml-1">Subject</label>
+                    <input type="text" name="subject" placeholder="Project Inquiry" required class="form-input">
                 </div>
                 <div class="space-y-3 text-left">
                     <label class="text-[10px] font-bold uppercase tracking-widest text-muted ml-1">Message</label>

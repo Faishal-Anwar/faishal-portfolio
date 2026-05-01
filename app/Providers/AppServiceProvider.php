@@ -21,17 +21,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (config('app.env') === 'production') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
-            \Illuminate\Support\Facades\URL::forceRootUrl('https://faishal-portfolio-blue.vercel.app');
-        }
-
         if (!app()->runningInConsole()) {
-            \Illuminate\Support\Facades\View::share('profile', Profile::first() ?? new Profile([
-                'name' => 'Faishal Anwar',
-                'title' => 'ML Engineer',
-                'email' => 'anwarfaishal86@gmail.com'
-            ]));
+            try {
+                $profile = Profile::first() ?? new Profile([
+                    'name' => 'Faishal Anwar',
+                    'title' => 'ML Engineer',
+                    'email' => 'anwarfaishal86@gmail.com'
+                ]);
+            } catch (\Exception $e) {
+                $profile = new Profile([
+                    'name' => 'Faishal Anwar',
+                    'title' => 'ML Engineer',
+                    'email' => 'anwarfaishal86@gmail.com'
+                ]);
+            }
+            \Illuminate\Support\Facades\View::share('profile', $profile);
         }
     }
 }

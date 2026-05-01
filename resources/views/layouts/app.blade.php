@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') | {{ $profile->name }}</title>
+    <meta name="description" content="Portfolio of {{ $profile->name }} - {{ $profile->title }}. Specializing in Machine Learning, Data Engineering, and Cloud Architecture.">
+    <meta name="keywords" content="Portfolio, {{ $profile->name }}, {{ $profile->title }}, Machine Learning Engineer, Data Engineer, Cloud Architect">
+    <meta name="author" content="{{ $profile->name }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title') | {{ $profile->name }}">
+    <meta property="og:description" content="Professional portfolio of {{ $profile->name }}, an expert in {{ $profile->title }}.">
+    <meta property="og:image" content="{{ $profile->image ? (strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image)) : asset('images/profile.png') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="@yield('title') | {{ $profile->name }}">
+    <meta property="twitter:description" content="Professional portfolio of {{ $profile->name }}, an expert in {{ $profile->title }}.">
+    <meta property="twitter:image" content="{{ $profile->image ? (strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image)) : asset('images/profile.png') }}">
     
     <script>
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -129,6 +146,19 @@
         .typed-cursor { opacity: 1; animation: blink 0.7s infinite; font-weight: 300; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
 
+        /* Mobile Nav Overlay Fix */
+        .mobile-nav-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: var(--bg-primary);
+            transform: translateX(-100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-nav-overlay.open {
+            transform: translateX(0);
+        }
+
         /* Timeline for About Page */
         .timeline-item { border-left: 1px solid var(--border-subtle); padding-left: 1.5rem; position: relative; padding-bottom: 3rem; transition: all 0.4s ease; cursor: default; }
         .timeline-item:hover { border-left-color: var(--text-main); background: var(--accent-glow); border-radius: 0 0.75rem 0.75rem 0; }
@@ -149,110 +179,11 @@
 <body class="overflow-x-hidden">
     <div class="flex min-h-screen relative text-main font-light">
         
-        <!-- Sidebar (Desktop) -->
-        <aside class="sidebar fixed top-0 bottom-0 left-0 z-[60] hidden lg:flex flex-col p-10">
-            <div class="mb-10 text-main text-left">
-                @if($profile->image)
-                <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-16 h-16 rounded-2xl object-cover mb-6 shadow-sm">
-                @else
-                <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-16 h-16 rounded-2xl object-cover mb-6 shadow-sm">
-                @endif
-                <h1 class="text-2xl font-bold tracking-tight">{{ $profile->name }}</h1>
-                <p class="text-xs text-muted font-bold uppercase tracking-widest mt-1">{{ $profile->title }}</p>
-            </div>
-            <div class="mb-8 text-left">
-                <a href="{{ route('download.cv') }}" download class="flex items-center gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-900 border border-black border-border-subtle dark:border-white rounded-xl text-[0.7rem] font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors text-main">
-                    <i data-lucide="download" class="w-3 h-3"></i> Download CV
-                </a>
-            </div>
-            <nav class="flex flex-col gap-1.5 flex-1 text-main text-left">
-                @auth
-                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.*') ? 'active' : '' }} border-b border-border-subtle/50 mb-2 pb-3"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
-                @endauth
-                <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
-                <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"><i data-lucide="user-circle" class="w-4 h-4"></i> About Me</a>
-                <a href="{{ route('projects') }}" class="nav-link {{ request()->routeIs('projects') ? 'active' : '' }}"><i data-lucide="folder-kanban" class="w-4 h-4"></i> Projects</a>
-                <a href="{{ route('stack') }}" class="nav-link {{ request()->routeIs('stack') ? 'active' : '' }}"><i data-lucide="layers" class="w-4 h-4"></i> Stack</a>
-                <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"><i data-lucide="mail" class="w-4 h-4"></i> Contact</a>
-            </nav>
-            <div class="mt-auto pt-10 border-t border-border-subtle space-y-8 text-main text-left">
-                <!-- Social Links -->
-                <div class="flex gap-5">
-                    @if($profile->github_url) <a href="{{ $profile->github_url }}" target="_blank" class="text-muted hover:text-main transition-all duration-300 hover:-translate-y-1 hover:scale-110"><i data-lucide="github" class="w-5 h-5"></i></a> @endif
-                    @if($profile->linkedin_url) <a href="{{ $profile->linkedin_url }}" target="_blank" class="text-muted hover:text-main transition-all duration-300 hover:-translate-y-1 hover:scale-110"><i data-lucide="linkedin" class="w-5 h-5"></i></a> @endif
-                    @if($profile->instagram_url) <a href="{{ $profile->instagram_url }}" target="_blank" class="text-muted hover:text-main transition-all duration-300 hover:-translate-y-1 hover:scale-110"><i data-lucide="instagram" class="w-5 h-5"></i></a> @endif
-                </div>
+        @include('partials.sidebar')
+        @include('partials.mobile-header')
+        @include('partials.mobile-nav')
 
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="flex items-center gap-3 group w-full text-left transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 bg-secondary border border-border-subtle rounded-xl flex items-center justify-center transition-all duration-300 group-hover:border-main group-hover:bg-main group-hover:text-primary">
-                        <i data-lucide="sun" class="w-4 h-4 block dark:hidden transition-transform group-hover:rotate-12"></i>
-                        <i data-lucide="moon" class="w-4 h-4 hidden dark:block transition-transform group-hover:-rotate-12"></i>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-[0.6rem] font-bold uppercase tracking-widest text-muted group-hover:text-main transition-colors duration-300">Theme</span>
-                        <span class="text-[0.55rem] font-medium uppercase tracking-widest text-muted/50 dark:hidden">Light Mode</span>
-                        <span class="text-[0.55rem] font-medium uppercase tracking-widest text-muted/50 hidden dark:block">Dark Mode</span>
-                    </div>
-                </button>
-            </div>
-        </aside>
-
-        <!-- Header (Mobile) -->
-        <header class="lg:hidden fixed top-6 left-6 right-6 z-[60] mobile-header rounded-2xl h-16 flex items-center px-4 backdrop-blur-md bg-white/70 dark:bg-black/70">
-            <div class="flex justify-between items-center w-full font-bold">
-                <div class="flex items-center gap-3 text-left">
-                    @if($profile->image)
-                    <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-8 h-8 rounded-full object-cover">
-                    @else
-                    <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-8 h-8 rounded-full object-cover">
-                    @endif
-                    <span class="font-bold tracking-tight text-base text-main">{{ $profile->name }}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button id="theme-toggle-mobile" class="w-10 h-10 flex items-center justify-center text-main bg-secondary/50 rounded-xl border border-border-subtle/50 transition-all hover:scale-105 active:scale-95">
-                        <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
-                        <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
-                    </button>
-                    <button id="mobile-menu-open" class="p-2 text-main"><i data-lucide="menu" class="w-6 h-6"></i></button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Mobile Nav Overlay -->
-        <div id="mobile-nav" class="mobile-nav-overlay lg:hidden flex flex-col p-8 backdrop-blur-xl text-left">
-            <div class="flex justify-between items-center mb-12 text-left">
-                <div class="flex items-center gap-3">
-                    @if($profile->image)
-                    <img src="{{ strpos($profile->image, 'http') === 0 ? $profile->image : asset('storage/' . $profile->image) }}" alt="Profile" class="w-10 h-10 rounded-full object-cover">
-                    @else
-                    <img src="{{ asset('images/profile.png') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover">
-                    @endif
-                    <span class="font-bold tracking-tight text-lg text-main">{{ $profile->name }}</span>
-                </div>
-                <button id="mobile-menu-close" class="p-2"><i data-lucide="x" class="w-7 h-7 text-main"></i></button>
-            </div>
-            <nav class="flex flex-col gap-4 text-left font-bold">
-                @auth
-                <a href="{{ route('admin.dashboard') }}" class="nav-link-mobile {{ request()->routeIs('admin.*') ? 'active' : '' }} border-b border-border-subtle/30 pb-4 mb-2"><i data-lucide="layout-dashboard" class="w-6 h-6"></i><span>Dashboard</span></a>
-                @endauth
-                <a href="{{ route('home') }}" class="nav-link-mobile {{ request()->routeIs('home') ? 'active' : '' }}"><i data-lucide="home" class="w-6 h-6"></i><span>Home</span></a>
-                <a href="{{ route('about') }}" class="nav-link-mobile {{ request()->routeIs('about') ? 'active' : '' }}"><i data-lucide="user-circle" class="w-6 h-6"></i><span>About Me</span></a>
-                <a href="{{ route('projects') }}" class="nav-link-mobile {{ request()->routeIs('projects') ? 'active' : '' }}"><i data-lucide="folder-kanban" class="w-6 h-6"></i><span>Projects</span></a>
-                <a href="{{ route('stack') }}" class="nav-link-mobile {{ request()->routeIs('stack') ? 'active' : '' }}"><i data-lucide="layers" class="w-6 h-6"></i><span>Stack</span></a>
-                <a href="{{ route('contact') }}" class="nav-link-mobile {{ request()->routeIs('contact') ? 'active' : '' }}"><i data-lucide="mail" class="w-6 h-6"></i><span>Contact</span></a>
-            </nav>
-            <div class="mt-auto pt-8 border-t border-border-subtle flex flex-col gap-8">
-                <a href="{{ route('download.cv') }}" download class="nav-link-mobile"><i data-lucide="download" class="w-6 h-6"></i><span>Download CV</span></a>
-                <div class="flex justify-center gap-8">
-                    @if($profile->github_url) <a href="{{ $profile->github_url }}" target="_blank" class="text-muted hover:text-main transition-colors"><i data-lucide="github" class="w-6 h-6 text-main"></i></a> @endif
-                    @if($profile->linkedin_url) <a href="{{ $profile->linkedin_url }}" target="_blank" class="text-muted hover:text-main transition-colors"><i data-lucide="linkedin" class="w-6 h-6 text-main"></i></a> @endif
-                    @if($profile->instagram_url) <a href="{{ $profile->instagram_url }}" target="_blank" class="text-muted hover:text-main transition-colors"><i data-lucide="instagram" class="w-6 h-6 text-main"></i></a> @endif
-                </div>
-            </div>
-        </div>
-
-        <main class="main-content flex-1 lg:ml-[var(--sidebar-w)] p-6 pt-24 sm:p-12 lg:p-20 elite-grid">
+        <main class="main-content flex-1 lg:ml-[var(--sidebar-w)] p-6 pt-24 lg:pt-20 sm:p-12 lg:p-20 elite-grid">
             @yield('content')
         </main>
     </div>
@@ -269,7 +200,13 @@
                     if(btn) btn.addEventListener('click', () => { 
                         const isDark = html.classList.toggle('dark'); 
                         localStorage.setItem('theme', isDark ? 'dark' : 'light'); 
-                        setTimeout(() => lucide.createIcons(), 10); 
+                        
+                        // Force Lucide to re-process icons to handle hidden/block state changes
+                        if (window.lucide) {
+                            setTimeout(() => {
+                                lucide.createIcons();
+                            }, 10);
+                        }
                     }); 
                 });
             } catch(e) { console.error(e); }

@@ -38,7 +38,14 @@ class CloudinaryService
             ]
         );
 
-        return $result['secure_url'];
+        $url = $result['secure_url'];
+        
+        // Add auto-optimization parameters for images
+        if ($resourceType === 'image') {
+            $url = str_replace('/upload/', '/upload/f_auto,q_auto/', $url);
+        }
+
+        return $url;
     }
 
     public function delete($url)

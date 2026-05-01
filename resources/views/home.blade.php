@@ -28,7 +28,7 @@
     </div>
 
     <section class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
-        @foreach($skills as $skill)
+        @foreach($coreSkills as $skill)
         <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
             <div class="glass-card p-10 space-y-6 group h-full">
                 <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform text-main">
@@ -106,7 +106,7 @@
                         @endforeach
                     </div>
                     <div class="pt-10 border-t border-border-subtle">
-                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-sm tracking-widest">View Case Study</a>
+                        <a href="{{ route('project-detail', $featuredProject->slug) }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold transition-transform hover:scale-[1.02] inline-block uppercase text-sm tracking-widest">View Project</a>
                     </div>
                 </div>
             </div>
