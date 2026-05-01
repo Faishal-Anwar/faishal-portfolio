@@ -87,11 +87,11 @@
     <div data-aos="fade-up">
         <section class="space-y-12 sm:space-y-16">
             <h2 class="font-bold tracking-tight uppercase text-muted text-xs tracking-[0.3em] text-left">Featured Project</h2>
-            <div class="project-card group grid grid-cols-1 lg:grid-cols-2">
-                <div class="aspect-video lg:aspect-auto bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center overflow-hidden relative border-b lg:border-b-0 lg:border-r border-border-subtle">
+            <div class="project-card group grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+                <div class="aspect-video lg:aspect-auto bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center overflow-hidden relative border-b lg:border-b-0 lg:border-r border-border-subtle p-8 sm:p-12 lg:p-16">
                      <div class="absolute inset-0 elite-grid opacity-10"></div>
                     @if($featuredProject->image)
-                    <img src="{{ strpos($featuredProject->image, 'http') === 0 ? $featuredProject->image : asset('storage/' . $featuredProject->image) }}" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="{{ $featuredProject->title }}">
+                    <img src="{{ strpos($featuredProject->image, 'http') === 0 ? $featuredProject->image : asset('storage/' . $featuredProject->image) }}" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 drop-shadow-2xl" alt="{{ $featuredProject->title }}">
                     @else
                     <i data-lucide="{{ $featuredProject->icon }}" class="w-24 h-24 sm:w-40 sm:h-40 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
                     @endif
