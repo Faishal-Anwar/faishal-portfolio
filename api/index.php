@@ -13,23 +13,16 @@ $isVercel = getenv('VERCEL') || getenv('NOW_REGION');
 if ($isVercel) {
     // Set storage path to /tmp for Vercel's read-only filesystem
     $storagePath = '/tmp/storage';
-    $paths = [
-        $storagePath . '/framework/views',
-        $storagePath . '/framework/cache',
-        $storagePath . '/framework/sessions',
-        $storagePath . '/bootstrap/cache',
-        $storagePath . '/app/public',
-        $storagePath . '/logs',
-    ];
-
-    foreach ($paths as $path) {
-        if (!is_dir($path)) {
-            mkdir($path, 0755, true);
-        }
+    
+    // Efficiently create necessary directories if they don't exist
+    if (!is_dir($storagePath . '/framework/views')) {
+        mkdir($storagePath . '/framework/views', 0755, true);
+        mkdir($storagePath . '/framework/cache', 0755, true);
+        mkdir($storagePath . '/framework/sessions', 0755, true);
+        mkdir($storagePath . '/bootstrap/cache', 0755, true);
     }
 
     // Set essential environment variables for Vercel
-    // These tell Laravel exactly where to write its manifest files
     putenv("APP_SERVICES_CACHE=$storagePath/bootstrap/cache/services.php");
     putenv("APP_PACKAGES_CACHE=$storagePath/bootstrap/cache/packages.php");
     putenv("APP_CONFIG_CACHE=$storagePath/bootstrap/cache/config.php");
@@ -37,7 +30,11 @@ if ($isVercel) {
     putenv("APP_EVENTS_CACHE=$storagePath/bootstrap/cache/events.php");
     
     putenv("VIEW_COMPILED_PATH=$storagePath/framework/views");
-    putenv("CACHE_STORE=array");
+    
+    // Use 'file' driver instead of 'array' for some persistence across same-worker requests
+    putenv("CACHE_STORE=file");
+    putenv("CACHE_DIRECTORY=$storagePath/framework/cache");
+    
     putenv("SESSION_DRIVER=cookie");
 }
 

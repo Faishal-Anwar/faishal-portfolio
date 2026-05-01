@@ -23,11 +23,13 @@ class AppServiceProvider extends ServiceProvider
     {
         if (!app()->runningInConsole()) {
             try {
-                $profile = Profile::first() ?? new Profile([
-                    'name' => 'Faishal Anwar',
-                    'title' => 'ML Engineer',
-                    'email' => 'anwarfaishal86@gmail.com'
-                ]);
+                $profile = \Illuminate\Support\Facades\Cache::remember('shared_profile', 86400, function() {
+                    return Profile::first() ?? new Profile([
+                        'name' => 'Faishal Anwar',
+                        'title' => 'ML Engineer',
+                        'email' => 'anwarfaishal86@gmail.com'
+                    ]);
+                });
             } catch (\Exception $e) {
                 $profile = new Profile([
                     'name' => 'Faishal Anwar',

@@ -22,37 +22,37 @@ class PublicController extends Controller
     public function home()
     {
         return view('home', [
-            'coreSkills' => Skill::all(),
-            'featuredProject' => Project::where('is_featured', true)->first(),
-            'topStacks' => TechStack::limit(6)->get(),
+            'coreSkills' => Cache::remember('home_skills', 86400, fn() => Skill::all()),
+            'featuredProject' => Cache::remember('home_featured', 86400, fn() => Project::where('is_featured', true)->first()),
+            'topStacks' => Cache::remember('home_top_stacks', 86400, fn() => TechStack::limit(6)->get()),
         ]);
     }
 
     public function about()
     {
         return view('about', [
-            'experiences' => Experience::orderBy('id', 'desc')->get(),
-            'educations' => Education::all(),
-            'certifications' => Certification::all(),
-            'awards' => Award::all(),
+            'experiences' => Cache::remember('about_experiences', 86400, fn() => Experience::orderBy('id', 'desc')->get()),
+            'educations' => Cache::remember('about_educations', 86400, fn() => Education::all()),
+            'certifications' => Cache::remember('about_certifications', 86400, fn() => Certification::all()),
+            'awards' => Cache::remember('about_awards', 86400, fn() => Award::all()),
         ]);
     }
 
     public function projects()
     {
-        $projects = Project::all();
+        $projects = Cache::remember('projects_all', 86400, fn() => Project::all());
         return view('projects', compact('projects'));
     }
 
     public function projectDetail($slug)
     {
-        $project = Project::where('slug', $slug)->firstOrFail();
+        $project = Cache::remember("project_detail_{$slug}", 86400, fn() => Project::where('slug', $slug)->firstOrFail());
         return view('project-detail', compact('project'));
     }
 
     public function stack()
     {
-        $stacks = TechStack::all()->groupBy('category');
+        $stacks = Cache::remember('stack_all', 86400, fn() => TechStack::all()->groupBy('category'));
         return view('stack', compact('stacks'));
     }
 
