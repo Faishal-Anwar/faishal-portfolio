@@ -17,6 +17,7 @@ if ($isVercel) {
         $storagePath . '/framework/views',
         $storagePath . '/framework/cache',
         $storagePath . '/framework/sessions',
+        $storagePath . '/bootstrap/cache',
         $storagePath . '/app/public',
         $storagePath . '/logs',
     ];
@@ -37,6 +38,13 @@ try {
 
     if ($isVercel) {
         $app->useStoragePath($storagePath);
+        
+        // Ensure bootstrap cache is also in /tmp
+        if (method_exists($app, 'setBootstrapCachePath')) {
+            $app->setBootstrapCachePath($storagePath . '/bootstrap/cache');
+        } elseif (method_exists($app, 'useBootstrapCachePath')) {
+             $app->useBootstrapCachePath($storagePath . '/bootstrap/cache');
+        }
     }
 
     $app->handleRequest(Request::capture());
