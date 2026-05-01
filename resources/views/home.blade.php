@@ -85,7 +85,7 @@
 
     @if($featuredProject)
     <div data-aos="fade-up">
-        <section class="space-y-12 sm:space-y-16">
+        <section class="space-y-8 sm:space-y-10">
             <h2 class="font-bold tracking-tight uppercase text-muted text-xs tracking-[0.3em] text-left">Featured Project</h2>
             <div class="project-card group grid grid-cols-1 lg:grid-cols-2 overflow-hidden border border-border-subtle rounded-3xl">
                 <div class="aspect-video lg:aspect-auto bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center overflow-hidden relative border-b lg:border-b-0 lg:border-r border-border-subtle">
@@ -96,11 +96,10 @@
                     <i data-lucide="{{ $featuredProject->icon }}" class="w-20 h-20 sm:w-32 sm:h-32 text-blue-600 dark:text-blue-400 transition-transform group-hover:scale-110"></i>
                     @endif
                 </div>
-                <div class="p-6 sm:p-10 lg:p-14 space-y-5 sm:space-y-6 flex flex-col justify-center text-left">
+                <div class="p-6 sm:p-10 lg:p-12 space-y-5 sm:space-y-6 flex flex-col justify-center text-left">
                     <div class="space-y-2 sm:space-y-3">
-                        <span class="text-[9px] sm:text-[10px] font-bold text-muted uppercase tracking-[0.2em]">Featured Project</span>
-                        <h4 class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-main leading-tight">{{ $featuredProject->title }}</h4>
-                        <p class="text-xs sm:text-sm lg:text-base text-muted leading-relaxed font-light text-justify line-clamp-3 sm:line-clamp-none">{{ $featuredProject->description }}</p>
+                        <h4 class="text-lg sm:text-xl font-bold text-main leading-tight">{{ $featuredProject->title }}</h4>
+                        <p class="text-sm sm:text-base text-muted leading-relaxed font-light text-justify">{{ $featuredProject->description }}</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         @foreach($featuredProject->tags as $tag)
@@ -112,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 sm:mt-12 pt-6 sm:pt-10 border-t border-border-subtle flex justify-end">
+            <div class="mt-4 sm:mt-6 pt-6 sm:pt-8 border-t border-border-subtle flex justify-end">
                 <a href="{{ route('projects') }}" class="text-[10px] sm:text-sm font-bold uppercase tracking-widest flex items-center gap-3 hover:opacity-60 transition-opacity text-main">View All Projects <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5"></i></a>
             </div>
         </section>
