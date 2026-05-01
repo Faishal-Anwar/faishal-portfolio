@@ -28,31 +28,24 @@ if ($isVercel) {
         }
     }
 
-    // Set essential environment variables
+    // Set essential environment variables for Vercel
+    // These tell Laravel exactly where to write its manifest files
+    putenv("APP_SERVICES_CACHE=$storagePath/bootstrap/cache/services.php");
+    putenv("APP_PACKAGES_CACHE=$storagePath/bootstrap/cache/packages.php");
+    putenv("APP_CONFIG_CACHE=$storagePath/bootstrap/cache/config.php");
+    putenv("APP_ROUTES_CACHE=$storagePath/bootstrap/cache/routes.php");
+    putenv("APP_EVENTS_CACHE=$storagePath/bootstrap/cache/events.php");
+    
     putenv("VIEW_COMPILED_PATH=$storagePath/framework/views");
+    putenv("CACHE_STORE=array");
+    putenv("SESSION_DRIVER=cookie");
 }
 
-try {
-    // Bootstrap Laravel and handle the request...
-    $app = require __DIR__ . '/../bootstrap/app.php';
+// Bootstrap Laravel and handle the request...
+$app = require __DIR__ . '/../bootstrap/app.php';
 
-    if ($isVercel) {
-        $app->useStoragePath($storagePath);
-        
-        // Ensure bootstrap cache is also in /tmp
-        if (method_exists($app, 'setBootstrapCachePath')) {
-            $app->setBootstrapCachePath($storagePath . '/bootstrap/cache');
-        } elseif (method_exists($app, 'useBootstrapCachePath')) {
-             $app->useBootstrapCachePath($storagePath . '/bootstrap/cache');
-        }
-    }
-
-    $app->handleRequest(Request::capture());
-} catch (\Throwable $e) {
-    // Catch everything and display it clearly for debugging
-    header('Content-Type: text/plain');
-    echo "ERROR: " . $e->getMessage() . "\n";
-    echo "FILE: " . $e->getFile() . " LINE: " . $e->getLine() . "\n";
-    echo "STACK TRACE:\n" . $e->getTraceAsString();
-    exit(1);
+if ($isVercel) {
+    $app->useStoragePath($storagePath);
 }
+
+$app->handleRequest(Request::capture());
