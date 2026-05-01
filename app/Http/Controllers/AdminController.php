@@ -11,6 +11,7 @@ use App\Models\Project;
 use App\Models\Inquiry;
 use App\Models\Award;
 use App\Models\Profile;
+use App\Models\TechStack;
 use App\Services\CloudinaryService;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
