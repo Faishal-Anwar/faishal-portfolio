@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-<div class="max-w-6xl mx-auto space-y-16 sm:space-y-24 text-main overflow-hidden">
+<div class="max-w-6xl mx-auto space-y-16 sm:space-y-24 text-main">
                 
     <div data-aos="fade-up">
         <section id="hero" class="space-y-8 sm:space-y-12 py-6 sm:py-12">
@@ -14,12 +14,12 @@
                         <span id="typed-text"></span>
                     </p>
                 </div>
-                <div class="flex flex-wrap items-center gap-4 sm:gap-6 w-full sm:w-auto">
-                    <div class="flex items-center gap-3 px-4 py-2 border border-border-subtle rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-muted bg-secondary/50 whitespace-nowrap">
-                        <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span>
-                        Available for Project
+                <div class="flex flex-row items-center gap-3 sm:gap-6 w-full sm:w-auto">
+                    <div class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 border border-border-subtle rounded-full text-[9px] sm:text-xs font-bold uppercase tracking-widest text-muted bg-secondary/50 whitespace-nowrap">
+                        <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-green-500"></span></span>
+                        Available
                     </div>
-                    <a href="{{ route('contact') }}" class="flex-1 sm:flex-none text-center px-6 sm:px-8 py-3 sm:py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.05] text-sm whitespace-nowrap">Contact Me</a>
+                    <a href="{{ route('contact') }}" class="flex-1 sm:flex-none text-center px-4 sm:px-8 py-3 sm:py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.05] text-[10px] sm:text-sm whitespace-nowrap">Contact Me</a>
                 </div>
             </div>
             <p class="text-lg sm:text-2xl text-muted leading-relaxed font-light text-justify">
