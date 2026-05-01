@@ -31,11 +31,20 @@ if ($isVercel) {
     putenv("VIEW_COMPILED_PATH=$storagePath/framework/views");
 }
 
-// Bootstrap Laravel and handle the request...
-$app = require __DIR__ . '/../bootstrap/app.php';
+try {
+    // Bootstrap Laravel and handle the request...
+    $app = require __DIR__ . '/../bootstrap/app.php';
 
-if ($isVercel) {
-    $app->useStoragePath($storagePath);
+    if ($isVercel) {
+        $app->useStoragePath($storagePath);
+    }
+
+    $app->handleRequest(Request::capture());
+} catch (\Throwable $e) {
+    // Catch everything and display it clearly for debugging
+    header('Content-Type: text/plain');
+    echo "ERROR: " . $e->getMessage() . "\n";
+    echo "FILE: " . $e->getFile() . " LINE: " . $e->getLine() . "\n";
+    echo "STACK TRACE:\n" . $e->getTraceAsString();
+    exit(1);
 }
-
-$app->handleRequest(Request::capture());
