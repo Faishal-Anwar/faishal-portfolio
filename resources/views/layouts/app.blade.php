@@ -83,7 +83,7 @@
         }
         
         @media (min-width: 1024px) {
-            html { font-size: 16px; } 
+            html { font-size: 14px; } 
             :root { --sidebar-w: 20rem; }
         }
 
