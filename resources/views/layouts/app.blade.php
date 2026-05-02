@@ -84,7 +84,7 @@
         
         @media (min-width: 1024px) {
             html { font-size: 16px; } 
-            :root { --sidebar-w: 20rem; }
+            :root { --sidebar-w: 18rem; }
         }
 
         body { 
