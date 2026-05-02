@@ -138,9 +138,9 @@
     </div>
 
     <div data-aos="zoom-in">
-        <section class="glass-card p-10 sm:p-20 text-center space-y-8 sm:space-y-10 elite-grid">
-            <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-main uppercase">Do you have any project idea?</h2>
-            <a href="{{ route('contact') }}" class="px-8 sm:px-12 py-4 sm:py-6 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-[1.05] inline-block uppercase text-[10px] sm:text-sm tracking-widest text-main">Contact Me</a>
+        <section class="glass-card p-10 sm:p-20 text-center space-y-6 sm:space-y-8 elite-grid">
+            <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-main">Do you have any project idea?</h2>
+            <a href="{{ route('contact') }}" class="px-8 py-4 sm:px-10 sm:py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-105 inline-block uppercase text-[10px] sm:text-xs tracking-widest">Let's Talk</a>
         </section>
     </div>
 

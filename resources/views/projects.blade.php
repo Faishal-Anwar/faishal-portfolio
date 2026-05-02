@@ -57,9 +57,9 @@
 
     <!-- CTA Section -->
     <div data-aos="zoom-in">
-        <section class="glass-card p-16 text-center space-y-8 elite-grid text-main">
-            <h2 class="text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main uppercase">Do you have any project idea?</h2>
-            <a href="{{ route('contact') }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-[1.05] inline-block uppercase text-xs tracking-widest text-main">Contact Me</a>
+        <section class="glass-card p-16 text-center space-y-8 elite-grid">
+            <h2 class="text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main">Do you have any project idea?</h2>
+            <a href="{{ route('contact') }}" class="px-10 py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-105 inline-block uppercase text-xs tracking-widest">Let's Talk</a>
         </section>
     </div>
 

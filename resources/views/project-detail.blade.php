@@ -34,8 +34,8 @@
         </div>
         
         <div class="space-y-4 text-left">
-            <h2 class="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tighter text-main uppercase leading-tight">{{ $project->title }}</h2>
-            <p class="text-lg sm:text-xl text-muted max-w-3xl font-light leading-relaxed text-justify sm:text-left">{{ $project->description }}</p>
+            <h2 class="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tighter text-main leading-tight">{{ $project->title }}</h2>
+            <p class="text-lg sm:text-xl text-muted font-light leading-relaxed text-justify sm:text-left">{{ $project->description }}</p>
         </div>
 
         <!-- Slider Section -->
@@ -111,7 +111,7 @@
 
     <!-- CTA Section -->
     <section data-aos="zoom-in" class="glass-card p-8 sm:p-16 text-center space-y-6 sm:space-y-8 elite-grid text-main">
-        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main uppercase">Interested in this project?</h2>
+        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight max-w-2xl mx-auto text-main">Interested in this project?</h2>
         <a href="{{ route('contact') }}" class="px-8 py-4 sm:px-10 sm:py-5 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-bold transition-transform hover:scale-[1.05] inline-block uppercase text-[10px] sm:text-xs tracking-widest text-main">Let's Talk</a>
     </section>
 
