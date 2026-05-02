@@ -101,7 +101,7 @@
                                 <span class="text-sm font-bold text-main">GitHub Repository</span>
                             </div>
                         </div>
-                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-muted group-hover:text-main transition-colors"></i>
+                        <i data-lucide="external-link" class="w-4 h-4 text-muted group-hover:text-main transition-colors"></i>
                     </a>
                 </div>
             </div>
