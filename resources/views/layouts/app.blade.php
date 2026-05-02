@@ -79,11 +79,11 @@
         html { 
             overflow-y: scroll; 
             scrollbar-gutter: stable; 
-            font-size: 18px; 
+            font-size: 17px; 
         }
         
         @media (min-width: 1024px) {
-            html { font-size: 18px; } 
+            html { font-size: 17px; } 
             :root { --sidebar-w: 20rem; }
         }
 
