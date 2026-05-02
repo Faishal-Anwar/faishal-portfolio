@@ -33,8 +33,8 @@
             </div>
         </div>
         
-        <div class="space-y-4 text-justify">
-            <h2 class="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tighter text-main leading-tight text-justify">{{ $project->title }}</h2>
+        <div class="space-y-4">
+            <h2 class="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tighter text-main leading-tight">{{ $project->title }}</h2>
             <p class="text-lg sm:text-xl text-muted font-light leading-relaxed text-justify">{{ $project->description }}</p>
         </div>
 
