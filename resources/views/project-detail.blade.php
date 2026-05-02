@@ -90,9 +90,20 @@
             @if($project->github_url)
             <div class="space-y-3 sm:space-y-6 text-left">
                 <h4 class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-muted">Links</h4>
-                <a href="{{ $project->github_url }}" target="_blank" class="flex items-center gap-2 font-bold text-sm sm:text-main hover:opacity-60 transition-all text-main">
-                    <i data-lucide="github" class="w-4 h-4 sm:w-5 sm:h-5"></i> GitHub Repository
-                </a>
+                <div class="flex flex-col gap-3">
+                    <a href="{{ $project->github_url }}" target="_blank" class="group flex items-center justify-between p-4 bg-secondary/30 border border-border-subtle rounded-2xl transition-all duration-300 hover:bg-main hover:border-main hover:-translate-y-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 flex items-center justify-center bg-white dark:bg-zinc-900 border border-border-subtle rounded-xl group-hover:border-transparent transition-colors">
+                                <i data-lucide="github" class="w-5 h-5 text-main"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-muted group-hover:text-primary/70 transition-colors">Code</span>
+                                <span class="text-sm font-bold text-main group-hover:text-primary transition-colors">GitHub Repository</span>
+                            </div>
+                        </div>
+                        <i data-lucide="external-link" class="w-4 h-4 text-muted group-hover:text-primary transition-colors"></i>
+                    </a>
+                </div>
             </div>
             @endif
         </aside>
