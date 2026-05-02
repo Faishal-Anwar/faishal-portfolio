@@ -94,7 +94,7 @@
                     <a href="{{ $project->github_url }}" target="_blank" class="group flex items-center justify-between p-4 bg-secondary/30 border border-border-subtle rounded-2xl transition-all duration-300 hover:bg-main hover:border-main hover:-translate-y-1">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 flex items-center justify-center bg-white dark:bg-zinc-900 border border-border-subtle rounded-xl group-hover:border-transparent transition-colors">
-                                <i data-lucide="github" class="w-5 h-5 text-main"></i>
+                                <i data-lucide="github" class="w-5 h-5 text-main group-hover:text-main"></i>
                             </div>
                             <div class="flex flex-col">
                                 <span class="text-[10px] font-bold uppercase tracking-widest text-muted group-hover:text-primary/70 transition-colors">Code</span>
@@ -126,6 +126,11 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Lucide Icons again for this page to ensure visibility
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+
         if (typeof Swiper !== 'undefined') {
             const swiper = new Swiper(".mySwiper", {
                 loop: true,
