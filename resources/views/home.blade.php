@@ -22,7 +22,7 @@
                     <a href="{{ route('contact') }}" class="flex-1 sm:flex-none text-center px-4 sm:px-8 py-3 sm:py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold transition-transform hover:scale-[1.05] text-[10px] sm:text-sm whitespace-nowrap">Contact Me</a>
                 </div>
             </div>
-            <p class="text-lg sm:text-2xl text-muted leading-relaxed font-light text-justify">
+            <p class="text-xl text-muted leading-relaxed font-light text-justify">
                 Hey 👋, I'm Faishal. I specialize in building scalable AI solutions, robust data pipelines, and architecting secure cloud infrastructures. I am dedicated to transforming complex datasets into actionable intelligence and designing resilient systems that empower data-driven innovation at scale.
             </p>
         </section>
